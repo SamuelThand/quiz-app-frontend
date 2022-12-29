@@ -1,0 +1,36 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  background-color: #353c45;
+  padding: 1rem;
+}
+
+h1 {
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+a:hover {
+  color: #007bff;
+}
+
+button {
+  color: #fff;
+  background-color: #007bff;
+  border: 0;
+  border-radius: 0.2rem;
+  margin-left: 1rem;
+  padding: 0.5rem;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
