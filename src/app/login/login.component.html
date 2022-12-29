@@ -1,3 +1,47 @@
 <!DOCTYPE html>
 
-<p>login works!</p>
+<div class="card">
+  <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="login-image" />
+
+  <!-- TODO lägg till form logik med ngIf, submit osv. -->
+  <form>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" name="username" required />
+      <div class="required-alert" role="alert" hidden>
+        Username is required to register!
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        required
+        minlength="6"
+      />
+      <div class="required-alert" role="alert" hidden>
+        <div>Password is required</div>
+        <div>Password must be at least 6 characters</div>
+      </div>
+      <div class="form-group">
+        <button>Login</button>
+      </div>
+      <div class="form-group">
+        <a class="create-new-user" routerLink="/register">Create new user</a>
+      </div>
+      <div class="form-group">
+        <a class="continue-as-guest" routerLink="/register">Continue as guest</a>
+      </div>
+      <div class="form-group">
+        <div class="required-alert" role="alert" hidden>
+          Login failed: errorMessage binding
+        </div>
+        <div class="alert alert-success" hidden>
+          Logged in as INLOGGAD_ADMIN binding.
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
