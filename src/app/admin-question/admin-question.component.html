@@ -1,1 +1,90 @@
-<p>admin-question works!</p>
+<!DOCTYPE html>
+
+<section class="list-container">
+  <h2>New Question</h2>
+  <div class="create-buttons">
+    <button routerLink="/admin-home">Save new question</button>
+    <button routerLink="/admin-home">Cancel</button>
+  </div>
+
+  <!-- TODO Form logic -->
+  <div class="list-item">
+    <form>
+      <div class="form-group">
+        <label for="name">Question name</label>
+        <input type="text" class="form-control" name="name" required />
+        <div class="required-alert" role="alert" hidden>
+          The question needs a name!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="alternative-1">Answer-alternative 1</label>
+        <input type="text" class="form-control" name="alternative-1" required />
+        <div class="required-alert" role="alert" hidden>
+          The question needs an alternative 1!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="alternative-x">Answer-alternative X</label>
+        <input type="text" class="form-control" name="alternative-x" required />
+        <div class="required-alert" role="alert" hidden>
+          The question needs an alternative x!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="alternative-2">Answer-alternative 2</label>
+        <input type="text" class="form-control" name="alternative-2" required />
+        <div class="required-alert" role="alert" hidden>
+          The question needs an alternative 2!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="correct-answer">Correct answer</label>
+        <select class="form-control" name="correct-answer" required>
+          <option>1</option>
+          <option>X</option>
+          <option>2</option>
+        </select>
+        <div class="required-alert" role="alert" hidden>
+          The question needs a correct answer!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="difficulty">Difficulty level</label>
+        <select class="form-control" name="difficulty">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <div class="required-alert" role="alert" hidden>
+          The question needs a difficulty!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="language">Language</label>
+        <input
+          type="text"
+          class="form-control"
+          name="language"
+          required
+        />
+        <div class="required-alert" role="alert" hidden>
+          <div>You need to specify the language of the question!</div>
+        </div>
+        <div class="form-group">
+          <label for="question">The question</label>
+          <textarea
+            rows="5"
+            type="text"
+            class="form-control question-input"
+            name="question"
+            required
+          ></textarea>
+          <div class="required-alert" role="alert" hidden>
+            The question needs a question text!
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
