@@ -1,0 +1,87 @@
+.component-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.list-container {
+  width: 40%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+  box-shadow: 0 0.2rem 0.2rem rgb(0 0 0 / 30%);
+}
+
+.container1 {
+  margin-left: auto;
+}
+
+.container2 {
+  margin-right: auto;
+}
+
+h2 {
+  margin-top: 1rem;
+  padding: 1rem;
+  align-self: center;
+}
+
+.search {
+  margin: 0 auto;
+  padding: 1rem;
+  outline: none;
+  width: 90%;
+}
+
+.create-buttons {
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  width: 90%;
+  box-shadow: 0 0.2rem 0.2rem rgb(0 0 0 / 30%);
+  background-color: #e08dab54;
+  user-select: none;
+  transition: transform 0.25s;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+button {
+  color: #fff;
+  background-color: #007bff;
+  border: 0;
+  border-radius: 0.2rem;
+  margin-left: 1rem;
+  padding: 0.5rem;
+}
+
+.button-group button {
+  margin-top: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.remove-button {
+  background-color: #AF1B3F;
+}
+
+.list-item:hover {
+  cursor: pointer;
+  transform: scale(1.025);
+}
