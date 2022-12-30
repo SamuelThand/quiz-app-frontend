@@ -1,1 +1,83 @@
-<p>register works!</p>
+<!DOCTYPE html>
+
+<div class="card">
+  <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="login-image" />
+
+  <!-- TODO lägg till form logik med ngIf, submit osv. -->
+  <form>
+    <div class="form-group">
+      <label for="firstname">First name</label>
+      <input type="text" class="form-control" name="firstname" required />
+      <div class="required-alert" role="alert" hidden>
+        Firstname is required to register!
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last name</label>
+      <input type="text" class="form-control" name="lastname" required />
+      <div class="required-alert" role="alert" hidden>
+        Firstname is required to register!
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" name="username" required />
+      <div class="required-alert" role="alert" hidden>
+        Username is required to register!
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        required
+        minlength="6"
+      />
+      <div class="required-alert" role="alert" hidden>
+        <div>Password is required</div>
+        <div>Password must be at least 6 characters</div>
+      </div>
+      <div class="form-group">
+        <label for="age">Age (Optional)</label>
+        <input
+          type="text"
+          inputmode="numeric"
+          class="form-control"
+          name="age"
+          maxlength="3"
+        />
+      </div>
+      <div class="form-group">
+        <label for="sex">Sex (Optional)</label>
+        <div class="sex-group">
+          <div class="radio-pair">
+            <label for="sex-male">Man</label>
+            <input type="radio" class="form-control" name="sex" id="sex-male" />
+          </div>
+          <div class="radio-pair">
+            <label for="sex-female">Woman</label>
+            <input
+              type="radio"
+              class="form-control"
+              name="sex"
+              id="sex-female"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button>Register</button>
+      </div>
+      <div class="form-group">
+        <div class="required-alert" role="alert" hidden>
+          Login failed: errorMessage binding
+        </div>
+        <div class="alert alert-success" hidden>
+          Logged in as INLOGGAD_ADMIN binding.
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
