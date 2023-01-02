@@ -35,7 +35,9 @@ export class BackendService {
    *
    * @returns Observable with an array of all existing Admin objects
    */
-  getAdmins(): Observable<Admin[]> {}
+  getAdmins(): Observable<Admin[]> {
+    return this.http.get<Admin[]>(this.adminEndpoint);
+  }
 
   /**
    * Get the Admin with the specified username.
@@ -43,7 +45,9 @@ export class BackendService {
    * @param username username of the Admin
    * @returns Observable with the Admin object
    */
-  getAdmin(username: string): Observable<Admin> {}
+  getAdmin(username: string): Observable<Admin> {
+    return this.http.get<Admin>(this.adminEndpoint + username);
+  }
 
   /* -------------------- Question methods -------------------- */
 
@@ -66,6 +70,10 @@ export class BackendService {
     return this.http.get<Question>(this.questionEndpoint + id);
   }
 
+  addQuestion(question: {}): Observable<Question> {
+    return this.http.post<Question>(this.questionEndpoint, question);
+  }
+
   /* -------------------- Quiz methods -------------------- */
 
   /**
@@ -73,7 +81,9 @@ export class BackendService {
    *
    * @returns Observable with an array of all existing Quiz objects
    */
-  getQuizzes(): Observable<Quiz[]> {}
+  getQuizzes(): Observable<Quiz[]> {
+    return this.http.get<Quiz[]>(this.quizEndpoint);
+  }
 
   // TODO: Change this and backend to id (name is not unique, if kept, make name unique)
   /**
@@ -82,7 +92,9 @@ export class BackendService {
    * @param name name of the Quiz
    * @returns Observable with the Quiz object
    */
-  getQuiz(name: string): Observable<Quiz> {}
+  getQuiz(name: string): Observable<Quiz> {
+    return this.http.get<Quiz>(this.quizEndpoint + name);
+  }
 
   /* -------------------- Subject methods -------------------- */
 
@@ -91,7 +103,9 @@ export class BackendService {
    *
    * @returns Observable with an array of all existing Subject objects
    */
-  getSubjects(): Observable<Subject[]> {}
+  getSubjects(): Observable<Subject[]> {
+    return this.http.get<Subject[]>(this.subjectEndpoint);
+  }
 
   /**
    * Get a Subject by subject code.
@@ -104,5 +118,7 @@ export class BackendService {
    * @param name name of the Quiz
    * @returns Observable with the Quiz object
    */
-  getSubject(subjectCode: string): Observable<Subject> {}
+  getSubject(subjectCode: string): Observable<Subject> {
+    return this.http.get<Subject>(this.subjectEndpoint + subjectCode);
+  }
 }
