@@ -1,5 +1,5 @@
 export interface Question {
-  _id: number;
+  _id?: number;
   creator: string;
   name: string;
   question: string;
@@ -7,7 +7,7 @@ export interface Question {
   optionX: string;
   option2: string;
   correctOption: string;
-  date: Date;
+  date?: Date;
   level: number;
   subject: string;
   language: string;

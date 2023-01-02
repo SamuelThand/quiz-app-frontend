@@ -3,7 +3,7 @@
 <section class="list-container">
   <h2>New Question</h2>
   <div class="create-buttons">
-    <button routerLink="/admin-home">Save new question</button>
+    <button (click)="addQuestion()">Save new question</button>
     <button routerLink="/admin-home">Cancel</button>
   </div>
 
@@ -12,35 +12,36 @@
     <form>
       <div class="form-group">
         <label for="name">Question name</label>
-        <input type="text" class="form-control" name="name" required />
+        <input [(ngModel)]="name" type="text" class="form-control" name="name" required />
         <div class="required-alert" role="alert" hidden>
           The question needs a name!
         </div>
       </div>
       <div class="form-group">
         <label for="alternative-1">Answer-alternative 1</label>
-        <input type="text" class="form-control" name="alternative-1" required />
+        <input [(ngModel)]="option1" type="text" class="form-control" name="alternative-1" required />
         <div class="required-alert" role="alert" hidden>
           The question needs an alternative 1!
         </div>
       </div>
       <div class="form-group">
         <label for="alternative-x">Answer-alternative X</label>
-        <input type="text" class="form-control" name="alternative-x" required />
+        <input [(ngModel)]="optionX" type="text" class="form-control" name="alternative-x" required />
         <div class="required-alert" role="alert" hidden>
           The question needs an alternative x!
         </div>
       </div>
       <div class="form-group">
         <label for="alternative-2">Answer-alternative 2</label>
-        <input type="text" class="form-control" name="alternative-2" required />
+        <input [(ngModel)]="option2" type="text" class="form-control" name="alternative-2" required />
         <div class="required-alert" role="alert" hidden>
           The question needs an alternative 2!
         </div>
       </div>
       <div class="form-group">
         <label for="correct-answer">Correct answer</label>
-        <select class="form-control" name="correct-answer" required>
+        <select [(ngModel)]="correctOption" class="form-control" name="correct-answer" required>
+          <option value="" disabled selected>Select correct answer..</option>
           <option>1</option>
           <option>X</option>
           <option>2</option>
@@ -51,10 +52,11 @@
       </div>
       <div class="form-group">
         <label for="difficulty">Difficulty level</label>
-        <select class="form-control" name="difficulty">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
+        <select [(ngModel)]="difficulty" class="form-control" name="difficulty">
+          <option value="0" disabled selected>Select difficulty...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
         </select>
         <div class="required-alert" role="alert" hidden>
           The question needs a difficulty!
@@ -63,6 +65,7 @@
       <div class="form-group">
         <label for="language">Language</label>
         <input
+          [(ngModel)]="language"
           type="text"
           class="form-control"
           name="language"
@@ -74,6 +77,7 @@
         <div class="form-group">
           <label for="question">The question</label>
           <textarea
+            [(ngModel)]="question"
             rows="5"
             type="text"
             class="form-control question-input"
@@ -84,6 +88,15 @@
             The question needs a question text!
           </div>
         </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select [(ngModel)]="subject" class="form-control" name="subject">
+          <option value="" disabled selected>Select subject...</option>
+          <option *ngFor="let subject of subjects" value="{{ subject.subjectCode }}">
+            {{ capitalFirstLetter(subject.name) }}
+          </option>
+        </select>
+      </div>
       </div>
     </form>
   </div>
