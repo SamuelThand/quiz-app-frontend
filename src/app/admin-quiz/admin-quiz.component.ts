@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { Question } from '../models/question.model';
 
@@ -10,6 +10,7 @@ import { Question } from '../models/question.model';
 export class AdminQuizComponent implements OnInit {
   availableQuestions: Question[] = [];
   newQuizQuestions: Question[] = [];
+  @Input() searchString: string = '';
   private backendService: BackendService;
 
   ngOnInit(): void {
@@ -20,6 +21,10 @@ export class AdminQuizComponent implements OnInit {
 
   constructor(backendService: BackendService) {
     this.backendService = backendService;
+  }
+
+  protected searchStringMatch(content: string): Boolean {
+    return content.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1;
   }
 
   protected onQuestionAdd(clickedQuestion: Question) {

@@ -9,6 +9,7 @@
   flex-direction: column;
   background-color: #f7f7f7;
   box-shadow: 0 0.2rem 0.2rem rgb(0 0 0 / 30%);
+  padding-bottom: 1rem;
 }
 
 .container1 {

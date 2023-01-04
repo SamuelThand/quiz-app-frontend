@@ -3,16 +3,28 @@
 <div class="component-container">
   <section class="list-container container1">
     <h2>Questions</h2>
-    <input class="search" type="text" placeholder="Search.." />
-    
-    <div *ngFor="let question of availableQuestions" class="list-item">
-      <h3>{{question.name}}</h3>
-      <p>{{question.question}}</p>
-      <div class="button-group">
-        <button (click)="onQuestionAdd(question)">Add</button>
+    <input
+      [(ngModel)]="searchString"
+      class="search"
+      type="text"
+      placeholder="Search.."
+    />
+
+    <div *ngFor="let question of availableQuestions">
+      <div
+        class="list-item"
+        *ngIf="
+          searchStringMatch(question.name) ||
+          searchStringMatch(question.question)
+        "
+      >
+        <h3>{{ question.name }}</h3>
+        <p>{{ question.question }}</p>
+        <div class="button-group">
+          <button (click)="onQuestionAdd(question)">Add</button>
+        </div>
       </div>
     </div>
-
   </section>
   <section class="list-container container2">
     <h2>New quiz</h2>
@@ -20,14 +32,18 @@
       <button routerLink="/admin-home">Create</button>
       <button routerLink="/admin-home">Cancel</button>
     </div>
-    
-    <div *ngFor="let question of newQuizQuestions"  class="list-item">
-      <h3>{{question.name}}</h3>
-      <p>{{question.question}}</p>
+
+    <div *ngFor="let question of newQuizQuestions" class="list-item">
+      <h3>{{ question.name }}</h3>
+      <p>{{ question.question }}</p>
       <div class="button-group">
-        <button (click)="onNewQuizQuestionRemove(question)" class="remove-button">Remove</button>
+        <button
+          (click)="onNewQuizQuestionRemove(question)"
+          class="remove-button"
+        >
+          Remove
+        </button>
       </div>
     </div>
-
   </section>
 </div>
