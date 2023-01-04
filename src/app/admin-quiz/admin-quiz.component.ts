@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { Question } from '../models/question.model';
+import { Quiz } from '../models/quiz.model';
 
 @Component({
   selector: 'app-admin-quiz',
@@ -45,5 +46,41 @@ export class AdminQuizComponent implements OnInit {
     this.availableQuestions.push(
       this.newQuizQuestions.splice(clickedNewQuizQuestionIndex, 1)[0]
     );
+  }
+
+  protected onQuizCreate() {
+    console.log('afaef');
+  }
+
+  createQuiz(): Quiz {
+    if (this.newQuizQuestions.length === 0) {
+      throw new Error('No questions have been selected.');
+    } else
+      return {
+        _id: 0,
+        creator: 'admin',
+        name: 'aa',
+        questions: ['aa', 'aa'],
+        level: 1,
+        date: new Date()
+      };
+
+    // _id: number;
+    // creator: string;
+    // name: string;
+    // questions: string[];
+    // level: number;
+    // date: Date;
+
+    // creator: 'Tester',
+    // name: this.name,
+    // question: this.question,
+    // option1: this.option1,
+    // optionX: this.optionX,
+    // option2: this.option2,
+    // correctOption: this.correctOption,
+    // level: this.difficulty,
+    // subject: this.subject,
+    // language: this.language
   }
 }
