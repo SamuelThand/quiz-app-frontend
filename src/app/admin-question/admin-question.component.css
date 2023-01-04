@@ -1,11 +1,11 @@
 .list-container {
   margin: 0 auto;
   width: 60%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #f7f7f7;
   box-shadow: 0 0.2rem 0.2rem rgb(0 0 0 / 30%);
+  padding-bottom: 1rem;
 }
 
 h2 {

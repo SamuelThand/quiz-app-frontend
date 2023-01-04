@@ -1,5 +1,5 @@
 export interface Question {
-  _id?: number;
+  _id?: string;
   creator: string;
   name: string;
   question: string;

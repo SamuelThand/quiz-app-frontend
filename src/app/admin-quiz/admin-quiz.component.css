@@ -5,11 +5,11 @@
 
 .list-container {
   width: 40%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #f7f7f7;
   box-shadow: 0 0.2rem 0.2rem rgb(0 0 0 / 30%);
+  padding-bottom: 1rem;
 }
 
 .container1 {
@@ -26,6 +26,10 @@ h2 {
   align-self: center;
 }
 
+h3 {
+  margin-bottom: 1rem;
+}
+
 .search {
   margin: 0 auto;
   padding: 1rem;
@@ -35,7 +39,7 @@ h2 {
 
 .create-buttons {
   margin: 0 auto;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   display: flex;
   flex-direction: row;
 }
@@ -75,6 +79,43 @@ button {
 button:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  padding: 0.2rem;
+  border-radius: 0.1rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+input {
+  width: 100%;
+  min-width: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+select, select option {
+  width: 100%;
+  min-width: 0;
+  background-color: #fff;
 }
 
 .remove-button {

@@ -102,6 +102,10 @@ export class BackendService {
     });
   }
 
+  addQuiz(quiz: {}): Observable<Quiz> {
+    return this.http.post<Quiz>(this.quizEndpoint, quiz);
+  }
+
   /* -------------------- Quiz methods -------------------- */
 
   /**
