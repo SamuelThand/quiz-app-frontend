@@ -30,6 +30,32 @@ export class BackendService {
 
   /* -------------------- Admin methods -------------------- */
 
+  // TODO: Add backend functionality for sign in and sign up (possibly new endpoint and service "auth")
+
+  /**
+   * Sign in an Admin object in the backend.
+   *
+   * @param username username of the Admin
+   * @param password password of the Admin
+   * @returns the Admin object
+   */
+  signIn(username: string, password: string): Observable<Admin> {
+    return this.http.post<Admin>(this.adminEndpoint + 'signin', {
+      username,
+      password
+    });
+  }
+
+  /**
+   * Create a new Admin object in the backend.
+   *
+   * @param admin new Admin object to be added to the backend
+   * @returns new Admin object
+   */
+  signUp(admin: Admin): Observable<Admin> {
+    return this.http.post<Admin>(this.adminEndpoint + 'signup', admin);
+  }
+
   /**
    * Get an array of all existing Admin objects from the backend.
    *
@@ -71,7 +97,9 @@ export class BackendService {
   }
 
   addQuestion(question: {}): Observable<Question> {
-    return this.http.post<Question>(this.questionEndpoint, question);
+    return this.http.post<Question>(this.questionEndpoint, question, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   /* -------------------- Quiz methods -------------------- */
