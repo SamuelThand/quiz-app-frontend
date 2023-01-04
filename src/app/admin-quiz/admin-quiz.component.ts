@@ -11,8 +11,8 @@ import { Quiz } from '../models/quiz.model';
 export class AdminQuizComponent implements OnInit {
   availableQuestions: Question[] = [];
   newQuizQuestions: Question[] = [];
-  newQuizName: String = '';
-  newQuizDifficulty: Number = 1;
+  newQuizName: string = '';
+  newQuizDifficulty: number = 1;
   @Input() searchString: string = '';
   private backendService: BackendService;
 
@@ -51,40 +51,25 @@ export class AdminQuizComponent implements OnInit {
   }
 
   protected onQuizCreate() {
-    console.log('afaef');
+    console.log(this.createQuiz());
+
+    this.backendService.addQuiz(this.createQuiz()).subscribe((quiz: Quiz) => {
+      console.log('Done');
+    });
   }
 
-  //TODO input för namn och level, kolla hur _id, referenser i questions och datum
-  // ska hanteras inför backend
   createQuiz(): Quiz {
     if (this.newQuizQuestions.length === 0) {
       throw new Error('No questions have been selected.');
     } else
       return {
-        _id: 0,
-        creator: 'admin',
-        name: 'aa',
-        questions: ['aa', 'aa'],
-        level: 1,
+        creator: 'admin', //TODO måste vara ett objektID för en admin
+        name: this.newQuizName,
+        questions: this.newQuizQuestions.flatMap(
+          (question) => (question._id ? [question._id] : []) // Filters out any undefined _id
+        ),
+        level: this.newQuizDifficulty,
         date: new Date()
       };
-
-    // _id: number;
-    // creator: string;
-    // name: string;
-    // questions: string[];
-    // level: number;
-    // date: Date;
-
-    // creator: 'Tester',
-    // name: this.name,
-    // question: this.question,
-    // option1: this.option1,
-    // optionX: this.optionX,
-    // option2: this.option2,
-    // correctOption: this.correctOption,
-    // level: this.difficulty,
-    // subject: this.subject,
-    // language: this.language
   }
 }
