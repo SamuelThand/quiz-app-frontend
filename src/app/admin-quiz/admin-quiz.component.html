@@ -5,37 +5,14 @@
     <h2>Questions</h2>
     <input class="search" type="text" placeholder="Search.." />
     
-    <!-- TODO populatea från databas -->
-    <div class="list-item">
-      <p>Title</p>
+    <div *ngFor="let question of availableQuestions" class="list-item">
+      <h3>{{question.name}}</h3>
+      <p>{{question.question}}</p>
       <div class="button-group">
-        <button>Add</button>
+        <button (click)="onQuestionAdd(question)">Add</button>
       </div>
     </div>
-    <div class="list-item">
-      <p>Title</p>
-      <div class="button-group">
-        <button>Add</button>
-      </div>
-    </div>
-    <div class="list-item">
-      <p>Title</p>
-      <div class="button-group">
-        <button>Add</button>
-      </div>
-    </div>
-    <div class="list-item">
-      <p>Title</p>
-      <div class="button-group">
-        <button>Add</button>
-      </div>
-    </div>
-    <div class="list-item">
-      <p>Title</p>
-      <div class="button-group">
-        <button>Add</button>
-      </div>
-    </div>
+
   </section>
   <section class="list-container container2">
     <h2>New quiz</h2>
@@ -43,11 +20,14 @@
       <button routerLink="/admin-home">Create</button>
       <button routerLink="/admin-home">Cancel</button>
     </div>
-    <div class="list-item">
-      <p>Title</p>
+    
+    <div *ngFor="let question of newQuizQuestions"  class="list-item">
+      <h3>{{question.name}}</h3>
+      <p>{{question.question}}</p>
       <div class="button-group">
-        <button class="remove-button">Remove</button>
+        <button (click)="onNewQuizQuestionRemove(question)" class="remove-button">Remove</button>
       </div>
     </div>
+
   </section>
 </div>
