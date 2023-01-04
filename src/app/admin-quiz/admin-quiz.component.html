@@ -32,6 +32,27 @@
       <button (click)="onQuizCreate()">Create</button>
       <button routerLink="/admin-home">Cancel</button>
     </div>
+    <form>
+      <div class="form-group">
+        <label for="name">Quiz name</label>
+        <input [(ngModel)]="newQuizName" type="text" class="form-control" name="name" required />
+        <div class="required-alert" role="alert" hidden>
+          The question needs a name!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="difficulty">Difficulty</label>
+        <select [(ngModel)]="newQuizDifficulty" class="form-control" name="difficulty">
+          <option value="0" disabled selected>Select difficulty...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <div class="required-alert" role="alert" hidden>
+          The question needs a difficulty!
+        </div>
+      </div>
+    </form>
 
     <div *ngFor="let question of newQuizQuestions" class="list-item">
       <h3>{{ question.name }}</h3>

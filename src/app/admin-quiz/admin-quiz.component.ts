@@ -11,6 +11,8 @@ import { Quiz } from '../models/quiz.model';
 export class AdminQuizComponent implements OnInit {
   availableQuestions: Question[] = [];
   newQuizQuestions: Question[] = [];
+  newQuizName: String = '';
+  newQuizDifficulty: Number = 1;
   @Input() searchString: string = '';
   private backendService: BackendService;
 
@@ -52,6 +54,8 @@ export class AdminQuizComponent implements OnInit {
     console.log('afaef');
   }
 
+  //TODO input för namn och level, kolla hur _id, referenser i questions och datum
+  // ska hanteras inför backend
   createQuiz(): Quiz {
     if (this.newQuizQuestions.length === 0) {
       throw new Error('No questions have been selected.');
