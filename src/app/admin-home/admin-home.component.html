@@ -11,7 +11,7 @@
   <div *ngFor="let quiz of quizzes" class="list-item">
     <h3>{{ quiz.name }}</h3>
     <!-- TODO fixa en query som populatear med mer info om skaparen -->
-    <p>Made by: {{ getAdminName(quiz.creator) }}</p>
+    <p>Made by: {{ getCreatorDescription(quiz.creator) }}</p>
     <p>Cration date: {{ quiz.date | date : 'yyyy-MM-dd - hh:mm ' }}</p>
     <p>Difficulty: {{ quiz.level }}</p>
 

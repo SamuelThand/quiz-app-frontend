@@ -22,7 +22,14 @@ export class AdminHomeComponent implements OnInit {
     this.backendService = backendService;
   }
 
-  getAdminName(creator: any): string {
+  /**
+   * Get the description of a creator object in the format "username - firstname lastname".
+   * If the creator object is undefined, return "N/A" instead.
+   *
+   * @param creator creator object from the quiz
+   * @returns description of the creator
+   */
+  getCreatorDescription(creator: any): string {
     return creator
       ? creator.userName + ' - ' + creator.firstName + ' ' + creator.lastName
       : 'N/A';
