@@ -9,39 +9,16 @@
 
   <!-- TODO populatea från databas -->
   <!-- TODO Lägg till play button och skapa play-komponent -->
-  <div class="list-item">
-    <p>Title</p>
+  <div *ngFor="let quiz of quizzes" class="list-item">
+    <h3>{{quiz.name}}</h3>
+    <!-- TODO fixa en query som populatear med mer info om skaparen -->
+    <p>Made by {{quiz.creator}}</p>
+    <p>Cration date: {{quiz.date}}</p>
+    <p>Difficulty: {{quiz.level}}</p>
     <div class="button-group">
       <button routerLink="/admin-quiz">Edit</button>
       <button>Delete</button>
     </div>
   </div>
-  <div class="list-item">
-    <p>Title</p>
-    <div class="button-group">
-      <button routerLink="/admin-quiz">Edit</button>
-      <button>Delete</button>
-    </div>
-  </div>
-  <div class="list-item">
-    <p>Title</p>
-    <div class="button-group">
-      <button routerLink="/admin-quiz">Edit</button>
-      <button>Delete</button>
-    </div>
-  </div>
-  <div class="list-item">
-    <p>Title</p>
-    <div class="button-group">
-      <button routerLink="/admin-quiz">Edit</button>
-      <button>Delete</button>
-    </div>
-  </div>
-  <div class="list-item">
-    <p>Title</p>
-    <div class="button-group">
-      <button routerLink="/admin-quiz">Edit</button>
-      <button>Delete</button>
-    </div>
-  </div>
+  
 </section>
