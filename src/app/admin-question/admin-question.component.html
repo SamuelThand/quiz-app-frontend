@@ -3,100 +3,219 @@
 <section class="list-container">
   <h2>New Question</h2>
   <div class="create-buttons">
-    <button (click)="addQuestion()">Save new question</button>
+    <button (click)="onSubmit()">Save new question</button>
     <button routerLink="/admin-home">Cancel</button>
   </div>
 
   <!-- TODO Form logic -->
   <div class="list-item">
-    <form>
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
       <div class="form-group">
         <label for="name">Question name</label>
-        <input [(ngModel)]="name" type="text" class="form-control" name="name" required />
-        <div class="required-alert" role="alert" hidden>
-          The question needs a name!
+        <input
+          [(ngModel)]="form.name"
+          type="text"
+          class="form-control"
+          name="name"
+          required
+          minlength="4"
+          #name="ngModel"
+        />
+        <div
+          class="required-alert"
+          *ngIf="name.errors && f.submitted"
+          role="alert"
+        >
+          <div *ngIf="name.errors['required']">The question needs a name!</div>
+          <div *ngIf="name.errors['minlength']">
+            The name needs to be at least 4 characters long!
+          </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="alternative-1">Answer-alternative 1</label>
-        <input [(ngModel)]="option1" type="text" class="form-control" name="alternative-1" required />
-        <div class="required-alert" role="alert" hidden>
-          The question needs an alternative 1!
+        <label for="alternative1">Answer-alternative 1</label>
+        <input
+          [(ngModel)]="form.option1"
+          type="text"
+          class="form-control"
+          name="alternative1"
+          required
+          #alternative1="ngModel"
+        />
+        <div
+          class="required-alert"
+          *ngIf="alternative1.errors && f.submitted"
+          role="alert"
+        >
+          <div *ngIf="alternative1.errors['required']">
+            The question needs an alternative 1!
+          </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="alternative-x">Answer-alternative X</label>
-        <input [(ngModel)]="optionX" type="text" class="form-control" name="alternative-x" required />
-        <div class="required-alert" role="alert" hidden>
-          The question needs an alternative x!
+        <label for="alternativeX">Answer-alternative X</label>
+        <input
+          [(ngModel)]="form.optionX"
+          type="text"
+          class="form-control"
+          name="alternativeX"
+          required
+          #alternativeX="ngModel"
+        />
+        <div
+          class="required-alert"
+          *ngIf="alternativeX.errors && f.submitted"
+          role="alert"
+        >
+          <div *ngIf="alternativeX.errors['required']">
+            The question needs an alternative x!
+          </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="alternative-2">Answer-alternative 2</label>
-        <input [(ngModel)]="option2" type="text" class="form-control" name="alternative-2" required />
-        <div class="required-alert" role="alert" hidden>
-          The question needs an alternative 2!
+        <label for="alternative2">Answer-alternative 2</label>
+        <input
+          [(ngModel)]="form.option2"
+          type="text"
+          class="form-control"
+          name="alternative2"
+          required
+          #alternative2="ngModel"
+        />
+        <div
+          class="required-alert"
+          *ngIf="alternative2.errors && f.submitted"
+          role="alert"
+        >
+          <div *ngIf="alternative2.errors['required']">
+            The question needs an alternative 2!
+          </div>
         </div>
       </div>
       <div class="form-group">
         <label for="correct-answer">Correct answer</label>
-        <select [(ngModel)]="correctOption" class="form-control" name="correct-answer" required>
+        <select
+          [(ngModel)]="form.correctOption"
+          class="form-control"
+          name="correct-answer"
+          required
+          #correctAnswer="ngModel"
+        >
           <option value="" disabled selected>Select correct answer..</option>
-          <option>1</option>
-          <option>X</option>
-          <option>2</option>
+          <option [value]="form.option1">1</option>
+          <option [value]="form.optionX">X</option>
+          <option [value]="form.option2">2</option>
         </select>
-        <div class="required-alert" role="alert" hidden>
-          The question needs a correct answer!
+        <div
+          class="required-alert"
+          *ngIf="correctAnswer.errors && f.submitted"
+          role="alert"
+        >
+          <div *ngIf="correctAnswer.errors['required']">
+            The question needs a correct answer!
+          </div>
         </div>
       </div>
       <div class="form-group">
         <label for="difficulty">Difficulty level</label>
-        <select [(ngModel)]="difficulty" class="form-control" name="difficulty">
+        <select
+          [(ngModel)]="form.difficulty"
+          class="form-control"
+          name="difficulty"
+          required
+          #difficulty="ngModel"
+        >
           <option value="0" disabled selected>Select difficulty...</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
         </select>
-        <div class="required-alert" role="alert" hidden>
-          The question needs a difficulty!
+        <div
+          class="required-alert"
+          *ngIf="difficulty.errors && f.submitted"
+          role="alert"
+        >
+          <div *ngIf="difficulty.errors['required']">
+            The question needs a difficulty!
+          </div>
         </div>
       </div>
       <div class="form-group">
         <label for="language">Language</label>
         <input
-          [(ngModel)]="language"
+          [(ngModel)]="form.language"
           type="text"
           class="form-control"
           name="language"
           required
+          #language="ngModel"
         />
-        <div class="required-alert" role="alert" hidden>
-          <div>You need to specify the language of the question!</div>
+        <div
+          class="required-alert"
+          *ngIf="language.errors && f.submitted"
+          role="alert"
+        >
+          <div *ngIf="language.errors['required']">
+            You need to specify the language of the question!
+          </div>
         </div>
         <div class="form-group">
           <label for="question">The question</label>
           <textarea
-            [(ngModel)]="question"
+            [(ngModel)]="form.question"
             rows="5"
             type="text"
             class="form-control question-input"
             name="question"
             required
+            #question="ngModel"
           ></textarea>
-          <div class="required-alert" role="alert" hidden>
-            The question needs a question text!
+          <div
+            class="required-alert"
+            *ngIf="question.errors && f.submitted"
+            role="alert"
+          >
+            <div *ngIf="question.errors['required']">
+              The question needs a question text!
+            </div>
           </div>
         </div>
-      <div class="form-group">
-        <label for="subject">Subject</label>
-        <select [(ngModel)]="subject" class="form-control" name="subject">
-          <option value="" disabled selected>Select subject...</option>
-          <option *ngFor="let subject of subjects" value="{{ subject._id }}">
-            {{ capitalFirstLetter(subject.name) }}
-          </option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select
+            [(ngModel)]="form.subject"
+            class="form-control"
+            name="subject"
+            required
+            #subject="ngModel"
+          >
+            <option value="" disabled selected>Select subject...</option>
+            <option
+              *ngFor="let subject of subjects"
+              value="{{ subject._id }}"
+            >
+              {{ capitalFirstLetter(subject.name) }}
+            </option>
+          </select>
+          <div
+            class="required-alert"
+            *ngIf="subject.errors && f.submitted"
+            role="alert"
+          >
+            <div *ngIf="subject.errors['required']">
+              The question needs a subject!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn">Add new question</button>
+        </div>
       </div>
     </form>
   </div>

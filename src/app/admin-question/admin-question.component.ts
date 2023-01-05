@@ -11,15 +11,22 @@ import { Subject } from '../models/subject.model';
 export class AdminQuestionComponent implements OnInit {
   private backendService: BackendService;
   subjects: Subject[] = [];
-  name: string = '';
-  question: string = '';
-  option1: string = '';
-  optionX: string = '';
-  option2: string = '';
-  correctOption: string = '';
-  difficulty: number = 0;
-  subject: string = '';
-  language: string = '';
+
+  form: any = {
+    name: null,
+    question: null,
+    option1: null,
+    optionX: null,
+    option2: null,
+    correctOption: null,
+    difficulty: null,
+    subject: null,
+    language: null
+  };
+
+  isSuccessful = false;
+  isPostFailed = false;
+  errorMessage = '';
 
   ngOnInit(): void {
     this.backendService.getSubjects().subscribe((subjects: Subject[]) => {
@@ -34,13 +41,20 @@ export class AdminQuestionComponent implements OnInit {
     this.questionAdded = new EventEmitter<Question>();
   }
 
-  addQuestion(): void {
+  onSubmit(): void {
     const newQuestion = this.createQuestion();
-    this.backendService
-      .addQuestion(newQuestion)
-      .subscribe((question: Question) => {
-        this.questionAdded.emit(question);
-      });
+    this.backendService.addQuestion(newQuestion).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isPostFailed = false;
+        this.questionAdded.emit(data);
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        this.isPostFailed = true;
+      }
+    });
   }
 
   createQuestion(): Question {
@@ -49,15 +63,15 @@ export class AdminQuestionComponent implements OnInit {
     }
     return {
       creator: '63af18d1fb461af8dc235cc6',
-      name: this.name,
-      question: this.question,
-      option1: this.option1,
-      optionX: this.optionX,
-      option2: this.option2,
-      correctOption: this.correctOption,
-      level: this.difficulty,
-      subject: this.subject,
-      language: this.language
+      name: this.form.name,
+      question: this.form.question,
+      option1: this.form.option1,
+      optionX: this.form.optionX,
+      option2: this.form.option2,
+      correctOption: this.form.correctOption,
+      level: this.form.difficulty,
+      subject: this.form.subject,
+      language: this.form.language
     };
   }
   capitalFirstLetter(str: string): string {
@@ -66,15 +80,15 @@ export class AdminQuestionComponent implements OnInit {
 
   validateForm(): boolean {
     return (
-      this.name !== '' &&
-      this.question !== '' &&
-      this.option1 !== '' &&
-      this.optionX !== '' &&
-      this.option2 !== '' &&
-      this.correctOption !== '' &&
-      this.difficulty !== 0 &&
-      this.subject !== '' &&
-      this.language !== ''
+      this.form.name !== '' &&
+      this.form.question !== '' &&
+      this.form.option1 !== '' &&
+      this.form.optionX !== '' &&
+      this.form.option2 !== '' &&
+      this.form.correctOption !== '' &&
+      this.form.difficulty !== 0 &&
+      this.form.subject !== '' &&
+      this.form.language !== ''
     );
   }
 }
