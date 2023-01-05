@@ -3,12 +3,14 @@
 <section class="list-container">
   <h2>New Question</h2>
   <div class="create-buttons">
-    <button (click)="onSubmit()">Save new question</button>
-    <button routerLink="/admin-home">Cancel</button>
+    <button routerLink="/admin-home">Home</button>
   </div>
 
   <!-- TODO Form logic -->
   <div class="list-item">
+    <div *ngIf="isSuccessful" class="success-alert">
+      Your question has been added!
+    </div>
     <form
       *ngIf="!isSuccessful"
       name="form"
@@ -107,7 +109,9 @@
           required
           #correctAnswer="ngModel"
         >
-          <option value="" disabled selected>Select correct answer..</option>
+          <option value="null" selected disabled>
+            Select correct answer..
+          </option>
           <option [value]="form.option1">1</option>
           <option [value]="form.optionX">X</option>
           <option [value]="form.option2">2</option>
@@ -131,7 +135,7 @@
           required
           #difficulty="ngModel"
         >
-          <option value="0" disabled selected>Select difficulty...</option>
+          <option value="null" disabled selected>Select difficulty...</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -195,10 +199,11 @@
             required
             #subject="ngModel"
           >
-            <option value="" disabled selected>Select subject...</option>
+            <option value="null" disabled selected>Select subject...</option>
             <option
               *ngFor="let subject of subjects"
-              value="{{ subject._id }}"
+              [value]="subject._id"
+              [title]="subject.description"
             >
               {{ capitalFirstLetter(subject.name) }}
             </option>
@@ -213,8 +218,8 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <button class="btn">Add new question</button>
+        <div class="create-buttons">
+          <button id="submit-button">Add new question</button>
         </div>
       </div>
     </form>
