@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Query } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from '../services/backend.service';
 import { Question } from '../models/question.model';
@@ -33,7 +33,7 @@ export class AdminQuizComponent implements OnInit {
       this.activatedRoute.queryParams.subscribe((params) => {
         // TODO populera quiz med deras frågor
         this.backendService.getQuiz(params['id']).subscribe((quiz: Quiz) => {
-          console.log(quiz);
+          this.newQuizQuestions = quiz.questions;
         });
       });
     }
