@@ -18,6 +18,7 @@ export class AdminQuizComponent implements OnInit {
   private backendService: BackendService;
   activatedRoute: ActivatedRoute;
   isEditMode: boolean = false;
+  // quizBeingEdited: Quiz | undefined = undefined;
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((data) => {
@@ -27,6 +28,15 @@ export class AdminQuizComponent implements OnInit {
     this.backendService.getQuestions().subscribe((questions: Question[]) => {
       this.availableQuestions = questions;
     });
+
+    if (this.isEditMode === true) {
+      this.activatedRoute.queryParams.subscribe((params) => {
+        // TODO populera quiz med deras frågor
+        this.backendService.getQuiz(params['id']).subscribe((quiz: Quiz) => {
+          console.log(quiz);
+        });
+      });
+    }
   }
 
   constructor(private route: ActivatedRoute, backendService: BackendService) {
@@ -43,8 +53,12 @@ export class AdminQuizComponent implements OnInit {
       (question) => question === clickedQuestion
     );
 
+    this.moveQuestionToNewQuizQuestions(clickedQuestionIndex);
+  }
+
+  private moveQuestionToNewQuizQuestions(questionIndex: number) {
     this.newQuizQuestions.push(
-      this.availableQuestions.splice(clickedQuestionIndex, 1)[0]
+      this.availableQuestions.splice(questionIndex, 1)[0]
     );
   }
 
