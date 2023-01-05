@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.service';
+import { DatePipe } from '@angular/common';
 import { Quiz } from '../models/quiz.model';
 
 @Component({
@@ -19,5 +20,11 @@ export class AdminHomeComponent implements OnInit {
 
   constructor(backendService: BackendService) {
     this.backendService = backendService;
+  }
+
+  getAdminName(creator: any): string {
+    return creator
+      ? creator.userName + ' - ' + creator.firstName + ' ' + creator.lastName
+      : 'N/A';
   }
 }
