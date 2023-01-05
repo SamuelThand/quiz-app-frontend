@@ -92,7 +92,7 @@
         <label for="subject">Subject</label>
         <select [(ngModel)]="subject" class="form-control" name="subject">
           <option value="" disabled selected>Select subject...</option>
-          <option *ngFor="let subject of subjects" value="{{ subject.subjectCode }}">
+          <option *ngFor="let subject of subjects" value="{{ subject._id }}">
             {{ capitalFirstLetter(subject.name) }}
           </option>
         </select>

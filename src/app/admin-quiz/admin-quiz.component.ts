@@ -63,7 +63,7 @@ export class AdminQuizComponent implements OnInit {
       throw new Error('No questions have been selected.');
     } else
       return {
-        creator: 'admin', //TODO måste vara ett objektID för en admin
+        creator: '63af18d1fb461af8dc235cc6',
         name: this.newQuizName,
         questions: this.newQuizQuestions.flatMap(
           (question) => (question._id ? [question._id] : []) // Filters out any undefined _id

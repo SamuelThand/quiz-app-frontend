@@ -48,7 +48,7 @@ export class AdminQuestionComponent implements OnInit {
       throw new Error('Form is not valid');
     }
     return {
-      creator: 'Tester',
+      creator: '63af18d1fb461af8dc235cc6',
       name: this.name,
       question: this.question,
       option1: this.option1,
