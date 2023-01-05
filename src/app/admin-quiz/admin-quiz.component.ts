@@ -10,15 +10,17 @@ import { Quiz } from '../models/quiz.model';
   styleUrls: ['./admin-quiz.component.css']
 })
 export class AdminQuizComponent implements OnInit {
+  private backendService: BackendService;
   availableQuestions: Question[] = [];
+  // TODO: Remove "new" to emphasize that this is not only for new quizzes
   newQuizQuestions: Question[] = [];
   newQuizName: string = '';
-  newQuizDifficulty: number = 1;
+  newQuizDifficulty: number = 0;
   @Input() searchString: string = '';
-  private backendService: BackendService;
   activatedRoute: ActivatedRoute;
   isEditMode: boolean = false;
   idOfQuizBeingEdited: string = '';
+  quizRecentlySubmitted: boolean = false;
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((data) => {
@@ -29,18 +31,12 @@ export class AdminQuizComponent implements OnInit {
     if (this.isEditMode === true) {
       this.activatedRoute.queryParams.subscribe((params) => {
         this.backendService.getQuiz(params['id']).subscribe((quiz: Quiz) => {
-          if (quiz._id !== undefined) {
-            this.idOfQuizBeingEdited = quiz._id;
-          }
-          this.newQuizQuestions = quiz.questions;
+          this.extractEditQuizData(quiz);
+
           this.backendService
             .getQuestions()
             .subscribe((questions: Question[]) => {
-              this.availableQuestions = questions.filter((question) => {
-                return !this.newQuizQuestions.some(
-                  (newQuizQuestion) => newQuizQuestion._id === question._id
-                );
-              });
+              this.filterAvailableQuestions(questions);
             });
         });
       });
@@ -54,6 +50,33 @@ export class AdminQuizComponent implements OnInit {
   constructor(private route: ActivatedRoute, backendService: BackendService) {
     this.backendService = backendService;
     this.activatedRoute = route;
+  }
+
+  /**
+   * Extracts data from quiz to be edited and sets it to the component's variables.
+   *
+   * @param quiz quiz to extract data from
+   */
+  private extractEditQuizData(quiz: Quiz) {
+    if (quiz._id !== undefined) {
+      this.idOfQuizBeingEdited = quiz._id;
+    }
+    this.newQuizQuestions = quiz.questions;
+    this.newQuizName = quiz.name;
+    this.newQuizDifficulty = quiz.level || 0;
+  }
+
+  /**
+   * Filters out questions that are already in the quiz from the list of available questions.
+   *
+   * @param questions questions to filter
+   */
+  private filterAvailableQuestions(questions: Question[]) {
+    this.availableQuestions = questions.filter((question) => {
+      return !this.newQuizQuestions.some(
+        (newQuizQuestion) => newQuizQuestion._id === question._id
+      );
+    });
   }
 
   protected searchStringMatch(content: string): Boolean {
@@ -87,16 +110,26 @@ export class AdminQuizComponent implements OnInit {
   protected onQuizCreate() {
     if (this.isEditMode) {
       //TODO id of quiz being edited
+      // Possibly take another approach if "quiz" shouldn't be used. Validate the update to the user in "Edit", close the "new quiz" or something.
       this.backendService
         .updateQuiz(this.idOfQuizBeingEdited, this.createQuiz())
         .subscribe((quiz: Quiz) => {
+          this.quizSubmitted();
           console.log('Done');
         });
     } else {
       this.backendService.addQuiz(this.createQuiz()).subscribe((quiz: Quiz) => {
+        this.quizSubmitted();
         console.log('Done');
       });
     }
+  }
+
+  private quizSubmitted() {
+    this.quizRecentlySubmitted = true;
+    setTimeout(() => {
+      this.quizRecentlySubmitted = false;
+    }, 5000);
   }
 
   createQuiz(): Quiz {

@@ -37,7 +37,13 @@
       <div class="form-group">
         <label for="name">Quiz name</label>
         <!-- TODO set so that existing name is shown if editmode -->
-        <input [(ngModel)]="newQuizName" type="text" class="form-control" name="name" required />
+        <input
+          [(ngModel)]="newQuizName"
+          type="text"
+          class="form-control"
+          name="name"
+          required
+        />
         <div class="required-alert" role="alert" hidden>
           The quiz needs a name!
         </div>
@@ -45,18 +51,37 @@
       <div class="form-group">
         <!-- TODO set so that existing difficulty is shown if editmode -->
         <label for="difficulty">Difficulty</label>
-        <select [(ngModel)]="newQuizDifficulty" class="form-control" name="difficulty">
+        <select
+          [(ngModel)]="newQuizDifficulty"
+          class="form-control"
+          name="difficulty"
+        >
           <option value="0" disabled selected>Select difficulty...</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
         </select>
-        <div class="required-alert" role="alert" hidden>
-          The quiz needs a difficulty!
-        </div>
       </div>
     </form>
-
+    <div class="success-wrapper">
+      <div
+        *ngIf="!isEditMode && quizRecentlySubmitted"
+        class="success-alert"
+        role="alert"
+      >
+        Quiz {{ newQuizName }} created!
+      </div>
+      <div
+        *ngIf="isEditMode && quizRecentlySubmitted"
+        class="success-alert"
+        role="alert"
+      >
+        Quiz {{ newQuizName }} updated!
+      </div>
+    </div>
+    <div class="required-alert" role="alert" hidden>
+      The quiz needs a difficulty!
+    </div>
     <div *ngFor="let question of newQuizQuestions" class="list-item">
       <h3>{{ question.name }}</h3>
       <p>{{ question.question }}</p>

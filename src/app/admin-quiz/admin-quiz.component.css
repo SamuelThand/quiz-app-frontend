@@ -20,6 +20,35 @@
   margin-right: auto;
 }
 
+.required-alert {
+  color: #721c24;
+  background-color: #fd9ca488;
+  border-color: #721c24;
+  position: relative;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid;
+  border-radius: 0.25rem;
+}
+
+.success-alert {
+  color: #1c722f;
+  background-color: #9cfdc188;
+  border-color: #1c722f;
+  position: relative;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid;
+  border-radius: 0.25rem;
+}
+
+.success-wrapper {
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h2 {
   margin-top: 1rem;
   padding: 1rem;
