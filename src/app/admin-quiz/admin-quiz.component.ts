@@ -18,23 +18,35 @@ export class AdminQuizComponent implements OnInit {
   private backendService: BackendService;
   activatedRoute: ActivatedRoute;
   isEditMode: boolean = false;
-  // quizBeingEdited: Quiz | undefined = undefined;
+  idOfQuizBeingEdited: string = '';
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((data) => {
       this.isEditMode = data['isEditMode'];
     });
 
-    this.backendService.getQuestions().subscribe((questions: Question[]) => {
-      this.availableQuestions = questions;
-    });
-
+    // TODO REFAKTORERA!!!!!!!! AAAAAAAAAHHHHH!!!!!!!!!!!!!!!!!!!!!!!!!!1
     if (this.isEditMode === true) {
       this.activatedRoute.queryParams.subscribe((params) => {
-        // TODO populera quiz med deras frågor
         this.backendService.getQuiz(params['id']).subscribe((quiz: Quiz) => {
+          if (quiz._id !== undefined) {
+            this.idOfQuizBeingEdited = quiz._id;
+          }
           this.newQuizQuestions = quiz.questions;
+          this.backendService
+            .getQuestions()
+            .subscribe((questions: Question[]) => {
+              this.availableQuestions = questions.filter((question) => {
+                return !this.newQuizQuestions.some(
+                  (newQuizQuestion) => newQuizQuestion._id === question._id
+                );
+              });
+            });
         });
+      });
+    } else {
+      this.backendService.getQuestions().subscribe((questions: Question[]) => {
+        this.availableQuestions = questions;
       });
     }
   }
@@ -73,11 +85,18 @@ export class AdminQuizComponent implements OnInit {
   }
 
   protected onQuizCreate() {
-    console.log(this.createQuiz());
-
-    this.backendService.addQuiz(this.createQuiz()).subscribe((quiz: Quiz) => {
-      console.log('Done');
-    });
+    if (this.isEditMode) {
+      //TODO id of quiz being edited
+      this.backendService
+        .updateQuiz(this.idOfQuizBeingEdited, this.createQuiz())
+        .subscribe((quiz: Quiz) => {
+          console.log('Done');
+        });
+    } else {
+      this.backendService.addQuiz(this.createQuiz()).subscribe((quiz: Quiz) => {
+        console.log('Done');
+      });
+    }
   }
 
   createQuiz(): Quiz {
