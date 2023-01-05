@@ -12,7 +12,16 @@ const routes: Routes = [
   { path: 'api-data', component: ApiDataComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'admin-home', component: AdminHomeComponent },
-  { path: 'admin-quiz', component: AdminQuizComponent },
+  {
+    path: 'admin-quiz-create',
+    component: AdminQuizComponent,
+    data: { isEditMode: false }
+  },
+  {
+    path: 'admin-quiz-edit',
+    component: AdminQuizComponent,
+    data: { isEditMode: true }
+  },
   { path: 'admin-question', component: AdminQuestionComponent }
 ];
 

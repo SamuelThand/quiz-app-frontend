@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BackendService } from '../services/backend.service';
 import { Question } from '../models/question.model';
 import { Quiz } from '../models/quiz.model';
@@ -15,15 +16,22 @@ export class AdminQuizComponent implements OnInit {
   newQuizDifficulty: number = 1;
   @Input() searchString: string = '';
   private backendService: BackendService;
+  activatedRoute: ActivatedRoute;
+  isEditMode: boolean = false;
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe((data) => {
+      this.isEditMode = data['isEditMode'];
+    });
+
     this.backendService.getQuestions().subscribe((questions: Question[]) => {
       this.availableQuestions = questions;
     });
   }
 
-  constructor(backendService: BackendService) {
+  constructor(private route: ActivatedRoute, backendService: BackendService) {
     this.backendService = backendService;
+    this.activatedRoute = route;
   }
 
   protected searchStringMatch(content: string): Boolean {
