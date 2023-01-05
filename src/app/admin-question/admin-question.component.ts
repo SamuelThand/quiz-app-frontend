@@ -45,7 +45,7 @@ export class AdminQuestionComponent implements OnInit {
     const newQuestion = this.createQuestion();
     this.backendService.addQuestion(newQuestion).subscribe({
       next: (data) => {
-        console.log(data);
+        console.log(data); // TODO: Remove log
         this.isSuccessful = true;
         this.isPostFailed = false;
         this.questionAdded.emit(data);
@@ -58,9 +58,6 @@ export class AdminQuestionComponent implements OnInit {
   }
 
   createQuestion(): Question {
-    if (!this.validateForm()) {
-      throw new Error('Form is not valid');
-    }
     return {
       creator: '63af18d1fb461af8dc235cc6',
       name: this.form.name,
@@ -78,6 +75,7 @@ export class AdminQuestionComponent implements OnInit {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+  // TODO: Remove if not used
   validateForm(): boolean {
     return (
       this.form.name !== '' &&
