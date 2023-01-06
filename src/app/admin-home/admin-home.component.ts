@@ -73,7 +73,21 @@ export class AdminHomeComponent implements OnInit {
     }
   }
 
-  onStartQuiz(id: any) {
+  /**
+   * Handler for the quiz component.
+   *
+   * @param clickedQuiz The quiz component that was clicked
+   */
+  onStartQuiz(clickedQuiz: Quiz): void {
+    this.startQuiz(clickedQuiz._id);
+  }
+
+  /**
+   * Navigate to the play-quiz component with the quiz id as a query parameter.
+   *
+   * @param id id of the quiz to play
+   */
+  private startQuiz(id: any) {
     this.router.navigate(['/play-quiz'], { queryParams: { id: id } });
   }
 }
