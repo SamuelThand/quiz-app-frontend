@@ -228,7 +228,13 @@ export class AdminQuizComponent implements OnInit {
       };
   }
 
-  getName(object: any): string {
+  /**
+   * Get the name of an object. If the object is undefined, return 'N/A'.
+   *
+   * @param object object with name property
+   * @returns string with name or 'N/A'
+   */
+  getObjectName(object: any): string {
     return object ? object.name : 'N/A';
   }
 }
