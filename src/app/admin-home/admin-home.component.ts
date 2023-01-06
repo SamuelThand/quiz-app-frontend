@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { Quiz } from '../models/quiz.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -10,6 +11,7 @@ import { Quiz } from '../models/quiz.model';
 export class AdminHomeComponent implements OnInit {
   quizzes: Quiz[] = [];
   private backendService: BackendService;
+  private router: Router;
 
   ngOnInit(): void {
     this.backendService.getQuizzes().subscribe((quizzes: Quiz[]) => {
@@ -17,8 +19,9 @@ export class AdminHomeComponent implements OnInit {
     });
   }
 
-  constructor(backendService: BackendService) {
+  constructor(backendService: BackendService, router: Router) {
     this.backendService = backendService;
+    this.router = router;
   }
 
   /**
@@ -52,5 +55,9 @@ export class AdminHomeComponent implements OnInit {
         (quiz: Quiz) => quiz._id !== clickedQuiz._id
       );
     }
+  }
+
+  onStartQuiz(id: any) {
+    this.router.navigate(['/play-quiz'], { queryParams: { id: id } });
   }
 }

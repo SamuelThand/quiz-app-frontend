@@ -8,7 +8,12 @@
   </div>
 
   <!-- TODO Lägg till play button (tryck på elementet för att visa förhandsgranskning? som play utan interaktiva funktioner) och skapa play-komponent -->
-  <div *ngFor="let quiz of quizzes" class="list-item">
+  <div
+    *ngFor="let quiz of quizzes"
+    (click)="onStartQuiz(quiz._id)"
+    class="list-item"
+    title="Click to play"
+  >
     <h3>{{ quiz.name }}</h3>
     <p>Difficulty: {{ quiz.level }}</p>
     <p>Number of questions: {{ quiz.questions.length }}</p>
