@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
+import { PlayQuizComponent } from './play-quiz/play-quiz.component';
 import { RegisterComponent } from './register/register.component';
 
 @NgModule({
@@ -19,7 +20,8 @@ import { RegisterComponent } from './register/register.component';
     RegisterComponent,
     AdminHomeComponent,
     AdminQuizComponent,
-    AdminQuestionComponent
+    AdminQuestionComponent,
+    PlayQuizComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

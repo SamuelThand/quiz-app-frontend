@@ -5,6 +5,7 @@ import { AdminQuizComponent } from './admin-quiz/admin-quiz.component';
 import { ApiDataComponent } from './api-data/api-data.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
+import { PlayQuizComponent } from './play-quiz/play-quiz.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
     component: AdminQuizComponent,
     data: { isEditMode: true }
   },
-  { path: 'admin-question', component: AdminQuestionComponent }
+  { path: 'admin-question', component: AdminQuestionComponent },
+  { path: 'play-quiz', component: PlayQuizComponent }
 ];
 
 @NgModule({
