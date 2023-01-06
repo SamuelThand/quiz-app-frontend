@@ -30,7 +30,8 @@
     <h2 *ngIf="!isEditMode">New quiz</h2>
     <h2 *ngIf="isEditMode">Edit quiz</h2>
     <div class="create-buttons">
-      <button (click)="onQuizCreate()">Create</button>
+      <button (click)="onQuizCreate()" *ngIf="!isEditMode">Create</button>
+      <button (click)="onQuizCreate()" *ngIf="isEditMode">Update</button>
       <button routerLink="/admin-home">Back</button>
     </div>
     <form>
@@ -38,7 +39,7 @@
         <label for="name">Quiz name</label>
         <!-- TODO set so that existing name is shown if editmode -->
         <input
-          [(ngModel)]="newQuizName"
+          [(ngModel)]="quizName"
           type="text"
           class="form-control"
           name="name"
@@ -52,7 +53,7 @@
         <!-- TODO set so that existing difficulty is shown if editmode -->
         <label for="difficulty">Difficulty</label>
         <select
-          [(ngModel)]="newQuizDifficulty"
+          [(ngModel)]="quizDifficulty"
           class="form-control"
           name="difficulty"
         >
@@ -69,25 +70,25 @@
         class="success-alert"
         role="alert"
       >
-        Quiz {{ newQuizName }} created!
+        Quiz {{ quizName }} created!
       </div>
       <div
         *ngIf="isEditMode && quizRecentlySubmitted"
         class="success-alert"
         role="alert"
       >
-        Quiz {{ newQuizName }} updated!
+        Quiz {{ quizName }} updated!
       </div>
     </div>
     <div class="required-alert" role="alert" hidden>
       The quiz needs a difficulty!
     </div>
-    <div *ngFor="let question of newQuizQuestions" class="list-item">
+    <div *ngFor="let question of quizQuestions" class="list-item">
       <h3>{{ question.name }}</h3>
       <p>{{ question.question }}</p>
       <div class="button-group">
         <button
-          (click)="onNewQuizQuestionRemove(question)"
+          (click)="onQuizQuestionRemove(question)"
           class="remove-button"
         >
           Remove

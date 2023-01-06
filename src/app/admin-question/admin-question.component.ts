@@ -10,9 +10,8 @@ import { Subject } from '../models/subject.model';
 })
 export class AdminQuestionComponent implements OnInit {
   private backendService: BackendService;
-  subjects: Subject[] = [];
-
-  form: any = {
+  protected subjects: Subject[] = [];
+  protected form: any = {
     name: null,
     question: null,
     option1: null,
@@ -23,17 +22,9 @@ export class AdminQuestionComponent implements OnInit {
     subject: null,
     language: null
   };
-
-  isSuccessful = false;
-  isPostFailed = false;
-  errorMessage = '';
-
-  ngOnInit(): void {
-    this.backendService.getSubjects().subscribe((subjects: Subject[]) => {
-      this.subjects = subjects;
-    });
-  }
-
+  protected isSuccessful = false;
+  protected isPostFailed = false;
+  private errorMessage = '';
   @Output() questionAdded = new EventEmitter<Question>();
 
   constructor(backendService: BackendService) {
@@ -41,11 +32,34 @@ export class AdminQuestionComponent implements OnInit {
     this.questionAdded = new EventEmitter<Question>();
   }
 
-  onSubmit(): void {
+  ngOnInit(): void {
+    this.initSubjects();
+  }
+
+  /**
+   * Initializes subjects member from the BackendService
+   */
+  private initSubjects() {
+    this.backendService.getSubjects().subscribe((subjects: Subject[]) => {
+      this.subjects = subjects;
+    });
+  }
+
+  /**
+   * Handler for the submission button.
+   */
+  protected onSubmit(): void {
+    this.addNewQuestion();
+  }
+
+  /**
+   * Uses the BackendService to add a new question.
+   */
+  private addNewQuestion() {
     const newQuestion = this.createQuestion();
     this.backendService.addQuestion(newQuestion).subscribe({
       next: (data) => {
-        console.log(data); // TODO: Remove log
+        console.log(data);
         this.isSuccessful = true;
         this.isPostFailed = false;
         this.questionAdded.emit(data);
@@ -57,7 +71,12 @@ export class AdminQuestionComponent implements OnInit {
     });
   }
 
-  createQuestion(): Question {
+  /**
+   * Reads form data, and constructs a new Question from the fields.
+   *
+   * @returns A new Question object
+   */
+  private createQuestion(): Question {
     return {
       creator: '63af18d1fb461af8dc235cc6',
       name: this.form.name,
@@ -71,22 +90,14 @@ export class AdminQuestionComponent implements OnInit {
       language: this.form.language
     };
   }
-  capitalFirstLetter(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
 
-  // TODO: Remove if not used
-  validateForm(): boolean {
-    return (
-      this.form.name !== '' &&
-      this.form.question !== '' &&
-      this.form.option1 !== '' &&
-      this.form.optionX !== '' &&
-      this.form.option2 !== '' &&
-      this.form.correctOption !== '' &&
-      this.form.difficulty !== 0 &&
-      this.form.subject !== '' &&
-      this.form.language !== ''
-    );
+  /**
+   * Capitalizes the first letter of a string.
+   *
+   * @param str The string to capitalize
+   * @returns The string with the first letter capitalized
+   */
+  protected capitalFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }

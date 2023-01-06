@@ -1,3 +1,5 @@
+/* Styles for AppComponent */
+
 nav {
   display: flex;
   flex-direction: row;
@@ -13,7 +15,10 @@ a {
   text-decoration: none;
 }
 
-a, a:visited, a:hover, a:active {
+a,
+a:visited,
+a:hover,
+a:active {
   color: inherit;
 }
 

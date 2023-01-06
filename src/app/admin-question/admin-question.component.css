@@ -1,3 +1,5 @@
+/* Styles for the admin-question component */
+
 .list-container {
   margin: 0 auto;
   width: 60%;
@@ -75,13 +77,18 @@ label {
   margin-top: 0.5rem;
 }
 
-input, textarea, select, select option {
+input,
+textarea,
+select,
+select option {
   border: 1px solid #000;
   border-radius: 0.2rem;
   font-size: medium;
 }
 
-input, select, select option {
+input,
+select,
+select option {
   background-color: #fff;
   height: 1.8rem;
 }
@@ -94,7 +101,6 @@ textarea {
   resize: none;
   outline: none;
 }
-
 
 button {
   color: #fff;
