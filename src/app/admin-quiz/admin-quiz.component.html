@@ -20,6 +20,8 @@
       >
         <h3>{{ question.name }}</h3>
         <p>{{ question.question }}</p>
+        <p>Difficulty: {{ question.level }}</p>
+        <p>Subject: {{ getName(question.subject) }}</p>
         <div class="button-group">
           <button (click)="onQuestionAdd(question)">Add</button>
         </div>

@@ -146,4 +146,8 @@ export class AdminQuizComponent implements OnInit {
         date: new Date()
       };
   }
+
+  getName(object: any): string {
+    return object ? object.name : 'N/A';
+  }
 }
