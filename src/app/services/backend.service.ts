@@ -110,6 +110,10 @@ export class BackendService {
     return this.http.put<Quiz>(this.quizEndpoint + id, quiz);
   }
 
+  deleteQuiz(id: string, quiz: {}): Observable<Quiz> {
+    return this.http.delete<Quiz>(this.quizEndpoint + id, quiz);
+  }
+
   /* -------------------- Quiz methods -------------------- */
 
   /**

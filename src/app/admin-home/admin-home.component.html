@@ -20,7 +20,7 @@
       <button routerLink="/admin-quiz-edit" [queryParams]="{ id: quiz._id }">
         Edit
       </button>
-      <button>Delete</button>
+      <button (click)="onQuizDelete(quiz)">Delete</button>
     </div>
   </div>
 </section>
