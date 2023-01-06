@@ -127,9 +127,9 @@ export class AdminQuizComponent implements OnInit {
 
   private quizSubmitted() {
     this.quizRecentlySubmitted = true;
-    setTimeout(() => {
-      this.quizRecentlySubmitted = false;
-    }, 5000);
+    // setTimeout(() => {
+    //   this.quizRecentlySubmitted = false;
+    // }, 5000);
   }
 
   createQuiz(): Quiz {
