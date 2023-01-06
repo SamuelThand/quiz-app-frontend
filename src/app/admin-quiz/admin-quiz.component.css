@@ -1,3 +1,5 @@
+/* Styles for the admin-quiz component */
+
 .component-container {
   display: flex;
   flex-direction: row;
@@ -65,7 +67,6 @@ h3 {
 
 .create-buttons {
   margin: 0 auto;
-  /* margin-bottom: 1rem; */
   display: flex;
   flex-direction: row;
 }
@@ -138,14 +139,15 @@ input:focus {
   outline: none;
 }
 
-select, select option {
+select,
+select option {
   width: 100%;
   min-width: 0;
   background-color: #fff;
 }
 
 .remove-button {
-  background-color: #AF1B3F;
+  background-color: #af1b3f;
 }
 
 .list-item:hover {

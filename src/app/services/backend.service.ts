@@ -1,10 +1,8 @@
 // Import angular modules
+import { Admin } from '../models/admin.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-// Import project models
-import { Admin } from '../models/admin.model';
 import { Question } from '../models/question.model';
 import { Quiz } from '../models/quiz.model';
 import { Subject } from '../models/subject.model';
@@ -14,8 +12,7 @@ import { Subject } from '../models/subject.model';
 })
 export class BackendService {
   // TODO: Replace localhost url with azure url
-  // URL to the backend
-  #url: string = 'http://localhost:3000/';
+  #url: string = 'http://localhost:3000/'; // URL to the backend
 
   // Route endpoints
   private adminEndpoint = this.#url + 'admins/';
@@ -96,22 +93,16 @@ export class BackendService {
     return this.http.get<Question>(this.questionEndpoint + id);
   }
 
+  /**
+   * Add a question.
+   *
+   * @param question to be added
+   * @returns Observable with the new Question object
+   */
   addQuestion(question: {}): Observable<Question> {
     return this.http.post<Question>(this.questionEndpoint, question, {
       headers: { 'Content-Type': 'application/json' }
     });
-  }
-
-  addQuiz(quiz: {}): Observable<Quiz> {
-    return this.http.post<Quiz>(this.quizEndpoint, quiz);
-  }
-
-  updateQuiz(id: string, quiz: {}): Observable<Quiz> {
-    return this.http.put<Quiz>(this.quizEndpoint + id, quiz);
-  }
-
-  deleteQuiz(id: string, quiz: {}): Observable<Quiz> {
-    return this.http.delete<Quiz>(this.quizEndpoint + id, quiz);
   }
 
   /* -------------------- Quiz methods -------------------- */
@@ -134,6 +125,38 @@ export class BackendService {
    */
   getQuiz(name: string): Observable<Quiz> {
     return this.http.get<Quiz>(this.quizEndpoint + name);
+  }
+
+  /**
+   * Add a quiz.
+   *
+   * @param quiz to be added
+   * @returns Observable with the new Quiz object
+   */
+  addQuiz(quiz: {}): Observable<Quiz> {
+    return this.http.post<Quiz>(this.quizEndpoint, quiz);
+  }
+
+  /**
+   * Update a quiz by id.
+   *
+   * @param id of the quiz
+   * @param quiz to be added
+   * @returns Observable with the updated Quiz object
+   */
+  updateQuiz(id: string, quiz: {}): Observable<Quiz> {
+    return this.http.put<Quiz>(this.quizEndpoint + id, quiz);
+  }
+
+  /**
+   * Delete a quiz by id.
+   *
+   * @param id of the quiz
+   * @param quiz to be deleted
+   * @returns Observable with the deleted Quiz object
+   */
+  deleteQuiz(id: string, quiz: {}): Observable<Quiz> {
+    return this.http.delete<Quiz>(this.quizEndpoint + id, quiz);
   }
 
   /* -------------------- Subject methods -------------------- */

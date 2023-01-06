@@ -1,3 +1,4 @@
+/* Styles for the login component */
 
 .card {
   display: flex;
@@ -58,8 +59,10 @@ button:hover {
   opacity: 0.5;
 }
 
-.create-new-user, .create-new-user:visited,
-.continue-as-guest, .continue-as-guest:visited {
+.create-new-user,
+.create-new-user:visited,
+.continue-as-guest,
+.continue-as-guest:visited {
   margin-top: 0.8rem;
   align-self: center;
   font-size: 0.8rem;
@@ -70,4 +73,3 @@ button:hover {
 .continue-as-guest:hover {
   opacity: 0.5;
 }
-
