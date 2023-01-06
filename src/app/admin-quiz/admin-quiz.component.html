@@ -37,7 +37,6 @@
     <form>
       <div class="form-group">
         <label for="name">Quiz name</label>
-        <!-- TODO set so that existing name is shown if editmode -->
         <input
           [(ngModel)]="quizName"
           type="text"
@@ -50,7 +49,6 @@
         </div>
       </div>
       <div class="form-group">
-        <!-- TODO set so that existing difficulty is shown if editmode -->
         <label for="difficulty">Difficulty</label>
         <select
           [(ngModel)]="quizDifficulty"
@@ -87,10 +85,7 @@
       <h3>{{ question.name }}</h3>
       <p>{{ question.question }}</p>
       <div class="button-group">
-        <button
-          (click)="onQuizQuestionRemove(question)"
-          class="remove-button"
-        >
+        <button (click)="onQuizQuestionRemove(question)" class="remove-button">
           Remove
         </button>
       </div>

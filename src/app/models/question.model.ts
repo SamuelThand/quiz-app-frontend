@@ -1,3 +1,6 @@
+/**
+ * Interface for Question objects
+ */
 export interface Question {
   _id?: string;
   creator: string;

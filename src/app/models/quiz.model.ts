@@ -1,3 +1,6 @@
+/**
+ * Interface for Quiz objects
+ */
 export interface Quiz {
   _id?: string;
   creator: string;

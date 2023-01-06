@@ -11,8 +11,8 @@ import { Subject } from '../models/subject.model';
   styleUrls: ['./api-data.component.css']
 })
 export class ApiDataComponent implements OnInit {
-  backendService: BackendService;
-  json: string = '';
+  private backendService: BackendService;
+  protected json: string = '';
 
   ngOnInit(): void {
     this.getAllDatabaseJSON();
@@ -22,6 +22,10 @@ export class ApiDataComponent implements OnInit {
     this.backendService = backendService;
   }
 
+  /**
+   * Builds a string from all database collections using the BackendService
+   * and assigns it to the json member.
+   */
   private getAllDatabaseJSON(): void {
     let dataString: string = '';
 

@@ -1,3 +1,6 @@
+/**
+ * Interface for Subject objects
+ */
 export interface Subject {
   _id?: string;
   name: string;
