@@ -12,10 +12,9 @@
   color: #721c24;
   background-color: #fd9ca488;
   border-color: #721c24;
-  position: relative;
   padding: 0.5rem 1.25rem;
   margin-bottom: 1rem;
-  border: 1px solid;
+  border: 0.1rem solid;
   border-radius: 0.25rem;
 }
 
@@ -23,10 +22,9 @@
   color: #1c722f;
   background-color: #9cfdc188;
   border-color: #1c722f;
-  position: relative;
   padding: 0.5rem 1.25rem;
   margin-bottom: 1rem;
-  border: 1px solid;
+  border: 0.1rem solid;
   border-radius: 0.25rem;
 }
 

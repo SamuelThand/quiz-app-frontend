@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.service';
-import { DatePipe } from '@angular/common';
 import { Quiz } from '../models/quiz.model';
 
 @Component({
@@ -33,5 +32,25 @@ export class AdminHomeComponent implements OnInit {
     return creator
       ? creator.userName + ' - ' + creator.firstName + ' ' + creator.lastName
       : 'N/A';
+  }
+
+  /**
+   * Delete a quiz from the database and delete it from the quizzes array.
+   *
+   * @param clickedQuiz The quiz to delete
+   */
+  onQuizDelete(clickedQuiz: Quiz): void {
+    if (clickedQuiz._id !== undefined) {
+      this.backendService
+        .deleteQuiz(clickedQuiz._id, clickedQuiz)
+        .subscribe((deletedQuiz: Quiz) => {
+          console.log('Done');
+          console.log(deletedQuiz);
+        });
+
+      this.quizzes = this.quizzes.filter(
+        (quiz: Quiz) => quiz._id !== clickedQuiz._id
+      );
+    }
   }
 }
