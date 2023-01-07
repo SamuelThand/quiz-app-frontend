@@ -15,7 +15,7 @@ export class PlayQuizComponent implements OnInit {
   private location: Location;
   protected quiz: Quiz | any;
   protected selectedOption: boolean[][] = [];
-  protected isSusccessful: boolean = false;
+  protected isSuccessful: boolean = false;
 
   constructor(
     activatedRoute: ActivatedRoute,
@@ -84,6 +84,9 @@ export class PlayQuizComponent implements OnInit {
     outerIndex: number,
     innerIndex: number
   ) {
+    if (this.isSuccessful) {
+      return;
+    }
     // Get the clicked option from the event
     if (event.target instanceof HTMLDivElement) {
       const clickedOption = event.target;
@@ -114,6 +117,7 @@ export class PlayQuizComponent implements OnInit {
    * Submits the form. This function is called when the submit button is clicked.
    */
   protected onSubmit(): void {
+    this.isSuccessful = true;
     console.log('submit');
   }
 }

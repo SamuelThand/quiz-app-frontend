@@ -26,6 +26,7 @@ button:hover {
 }
 
 label {
+   cursor: pointer;
    margin-left: 1rem;
 }
 
@@ -49,6 +50,14 @@ label {
 
 .selected {
    background-color: #8d95e054;
+}
+
+.correct {
+   background-color: #8de05454;
+}
+
+.incorrect {
+   background-color: #e0545454;
 }
 
 .list-container {

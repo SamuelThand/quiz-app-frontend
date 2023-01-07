@@ -22,7 +22,17 @@
           let second = index
         "
         (click)="onOptionClick($event, first, second)"
-        [ngClass]="{ selected: selectedOption[first][second] || false }"
+        [ngClass]="{
+          selected: selectedOption[first][second] && !isSuccessful,
+          correct:
+            selectedOption[first][second] &&
+            isSuccessful &&
+            option === question.correctOption,
+          incorrect:
+            selectedOption[first][second] &&
+            isSuccessful &&
+            option !== question.correctOption
+        }"
       >
         <input
           type="radio"
