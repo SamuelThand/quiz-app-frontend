@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from '../services/backend.service';
+import { Location } from '@angular/common';
 import { Quiz } from '../models/quiz.model';
 
 @Component({
@@ -10,23 +11,109 @@ import { Quiz } from '../models/quiz.model';
 })
 export class PlayQuizComponent implements OnInit {
   private backendService: BackendService;
-  activatedRoute: ActivatedRoute;
-  quiz: Quiz | any;
+  private activatedRoute: ActivatedRoute;
+  private location: Location;
+  protected quiz: Quiz | any;
+  protected selectedOption: boolean[][] = [];
+  protected isSusccessful: boolean = false;
+
+  constructor(
+    activatedRoute: ActivatedRoute,
+    backendService: BackendService,
+    location: Location
+  ) {
+    this.activatedRoute = activatedRoute;
+    this.backendService = backendService;
+    this.location = location;
+  }
 
   ngOnInit(): void {
+    this.quiz = {};
+    this.initQuiz();
+  }
+
+  /**
+   * Initializes quiz member from the BackendService
+   */
+  private initQuiz() {
     this.activatedRoute.queryParams.subscribe((param) => {
       this.backendService.getQuiz(param['id']).subscribe((quiz: Quiz) => {
         this.quiz = quiz;
+        this.fillSelectedOption(quiz.questions.length);
       });
     });
   }
 
-  constructor(activatedRoute: ActivatedRoute, backendService: BackendService) {
-    this.activatedRoute = activatedRoute;
-    this.backendService = backendService;
+  /**
+   * Fills the selectedOption array with 3 false values for each iteration.
+   *
+   * @param length length of iterations
+   */
+  fillSelectedOption(length: number): void {
+    for (let i = 0; i < length; i++) {
+      this.selectedOption[i] = [];
+      for (let j = 0; j < 3; j++) {
+        this.selectedOption[i][j] = false;
+      }
+    }
   }
 
-  stringJson(quiz: Quiz): string {
-    return JSON.stringify(quiz);
+  /**
+   * Handler for the Back button.
+   */
+  onGoBack(): void {
+    this.goBack();
+  }
+
+  /**
+   * Go back to the previous page.
+   */
+  private goBack(): void {
+    this.location.back();
+  }
+
+  /**
+   * Handler for the option click event.
+   *
+   * @param event the event that triggered the function
+   * @param outerIndex index outer array
+   * @param innerIndex index inner array
+   */
+  protected onOptionClick(
+    event: MouseEvent,
+    outerIndex: number,
+    innerIndex: number
+  ) {
+    // Get the clicked option from the event
+    if (event.target instanceof HTMLDivElement) {
+      const clickedOption = event.target;
+      // Get the input element
+      const optionInput = clickedOption.querySelector(
+        'input'
+      ) as HTMLInputElement;
+      // Set the input element to checked
+      optionInput.checked = true;
+    }
+    this.toggleSelected(outerIndex, innerIndex);
+  }
+
+  /**
+   * Toggles the selected option.
+   *
+   * @param outerIndex index outer array
+   * @param innerIndex index inner array
+   */
+  private toggleSelected(outerIndex: number, innerIndex: number): void {
+    this.selectedOption[outerIndex].fill(false);
+    this.selectedOption[outerIndex][innerIndex] = true;
+    console.log('Question number: ' + (outerIndex + 1));
+    console.log(this.selectedOption[outerIndex]);
+  }
+
+  /**
+   * Submits the form. This function is called when the submit button is clicked.
+   */
+  protected onSubmit(): void {
+    console.log('submit');
   }
 }

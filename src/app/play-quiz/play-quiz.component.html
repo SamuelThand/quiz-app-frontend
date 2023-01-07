@@ -1,1 +1,41 @@
-<p>{{ stringJson(this.quiz) }}</p>
+<div class="list-container">
+  <h2>{{ quiz.name }}</h2>
+  <form
+    name="form"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidate
+  >
+    <div class="button-group">
+      <button type="submit">Send quiz</button>
+      <button (click)="onGoBack()" type="button">Back</button>
+    </div>
+    <div
+      class="list-item"
+      *ngFor="let question of quiz.questions; let first = index"
+    >
+      <h3>{{ first + 1 }}. {{ question.question }}</h3>
+      <div
+        class="option"
+        *ngFor="
+          let option of [question.option1, question.optionX, question.option2];
+          let second = index
+        "
+        (click)="onOptionClick($event, first, second)"
+        [ngClass]="{ selected: selectedOption[first][second] || false }"
+      >
+        <input
+          type="radio"
+          name="question{{ first }}"
+          value="{{ option }}"
+          id="question{{ first }}-option{{ second }}"
+          hidden
+        />
+        <label for="question{{ first }}-option{{ second }}">{{ option }}</label>
+      </div>
+    </div>
+    <div class="button-group">
+      <button type="submit">Send quiz</button>
+    </div>
+  </form>
+</div>
