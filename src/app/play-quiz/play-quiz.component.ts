@@ -120,4 +120,15 @@ export class PlayQuizComponent implements OnInit {
     this.isSuccessful = true;
     console.log('submit');
   }
+
+  /**
+   * Returns a string based on the option index.
+   *
+   * @param index index of the option
+   * @returns a sting with the option label
+   */
+  protected getOptionLabel(index: number): string {
+    const label = ['1.', 'X.', '2.'];
+    return label[index];
+  }
 }
