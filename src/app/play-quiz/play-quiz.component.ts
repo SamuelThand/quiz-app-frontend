@@ -117,8 +117,20 @@ export class PlayQuizComponent implements OnInit {
    * Submits the form. This function is called when the submit button is clicked.
    */
   protected onSubmit(): void {
+    this.submit();
+  }
+
+  /**
+   * Increases the counter "played" of the quiz and updates the quiz in the database.
+   */
+  private submit(): void {
     this.isSuccessful = true;
-    console.log('submit');
+    this.quiz.played = this.quiz.played ? this.quiz.played + 1 : 1;
+    this.backendService
+      .updateQuiz(this.quiz._id, this.quiz)
+      .subscribe((quiz: Quiz) => {
+        console.log(quiz);
+      });
   }
 
   /**

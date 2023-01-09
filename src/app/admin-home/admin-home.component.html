@@ -18,6 +18,7 @@
     <p>Number of questions: {{ quiz.questions.length }}</p>
     <p>Made by: {{ getCreatorDescription(quiz.creator) }}</p>
     <p>Cration date: {{ quiz.date | date : 'yyyy-MM-dd - hh:mm ' }}</p>
+    <p>Played: {{ quiz.played }}</p>
 
     <div *ngIf="isAdmin" class="button-group">
       <!-- TODO send the quiz object as data to the edit component -->

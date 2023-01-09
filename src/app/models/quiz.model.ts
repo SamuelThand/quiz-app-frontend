@@ -8,4 +8,5 @@ export interface Quiz {
   questions: any[];
   level: number;
   date: Date;
+  played?: number;
 }
