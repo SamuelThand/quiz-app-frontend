@@ -7,7 +7,6 @@
     <button routerLink="/admin-question">Create new question</button>
   </div>
 
-  <!-- TODO Lägg till play button (tryck på elementet för att visa förhandsgranskning? som play utan interaktiva funktioner) och skapa play-komponent -->
   <div
     *ngFor="let quiz of quizzes"
     (click)="onStartQuiz(quiz)"
