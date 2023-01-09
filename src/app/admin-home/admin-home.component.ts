@@ -1,7 +1,7 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { Quiz } from '../models/quiz.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -10,16 +10,34 @@ import { Router } from '@angular/router';
 })
 export class AdminHomeComponent implements OnInit {
   protected quizzes: Quiz[] = [];
+  private activatedRoute: ActivatedRoute;
   private backendService: BackendService;
   private router: Router;
+  protected isAdmin: boolean = false;
 
-  constructor(backendService: BackendService, router: Router) {
+  constructor(
+    activatedRoute: ActivatedRoute,
+    backendService: BackendService,
+    router: Router
+  ) {
+    this.activatedRoute = activatedRoute;
     this.backendService = backendService;
     this.router = router;
   }
 
   ngOnInit(): void {
+    this.determineEditMode();
+
     this.initQuizzes();
+  }
+
+  /**
+   * Determines if the component should be run as admin or not.
+   */
+  private determineEditMode() {
+    this.activatedRoute.data.subscribe((data) => {
+      this.isAdmin = data['isAdmin'];
+    });
   }
 
   /**

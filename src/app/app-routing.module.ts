@@ -12,7 +12,16 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'api-data', component: ApiDataComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin-home', component: AdminHomeComponent },
+  {
+    path: 'admin-home',
+    component: AdminHomeComponent,
+    data: { isAdmin: true }
+  },
+  {
+    path: 'guest-home',
+    component: AdminHomeComponent,
+    data: { isAdmin: false }
+  },
   {
     path: 'admin-quiz-create',
     component: AdminQuizComponent,

@@ -2,7 +2,7 @@
 
 <section class="list-container">
   <h2>Quizzes</h2>
-  <div class="create-buttons">
+  <div *ngIf="isAdmin" class="create-buttons">
     <button routerLink="/admin-quiz-create">Create new quiz</button>
     <button routerLink="/admin-question">Create new question</button>
   </div>
@@ -19,7 +19,7 @@
     <p>Made by: {{ getCreatorDescription(quiz.creator) }}</p>
     <p>Cration date: {{ quiz.date | date : 'yyyy-MM-dd - hh:mm ' }}</p>
 
-    <div class="button-group">
+    <div *ngIf="isAdmin" class="button-group">
       <!-- TODO send the quiz object as data to the edit component -->
       <button routerLink="/admin-quiz-edit" [queryParams]="{ id: quiz._id }">
         Edit
