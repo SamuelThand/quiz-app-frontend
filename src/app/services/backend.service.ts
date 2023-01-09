@@ -37,10 +37,16 @@ export class BackendService {
    * @returns the Admin object
    */
   signIn(username: string, password: string): Observable<Admin> {
-    return this.http.post<Admin>(this.adminEndpoint + 'signin', {
-      username,
-      password
-    });
+    return this.http.post<Admin>(
+      this.adminEndpoint + 'signin',
+      {
+        username,
+        password
+      },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
   }
 
   /**
@@ -50,7 +56,9 @@ export class BackendService {
    * @returns new Admin object
    */
   signUp(admin: Admin): Observable<Admin> {
-    return this.http.post<Admin>(this.adminEndpoint + 'signup', admin);
+    return this.http.post<Admin>(this.adminEndpoint + 'signup', admin, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   /**
@@ -134,7 +142,9 @@ export class BackendService {
    * @returns Observable with the new Quiz object
    */
   addQuiz(quiz: {}): Observable<Quiz> {
-    return this.http.post<Quiz>(this.quizEndpoint, quiz);
+    return this.http.post<Quiz>(this.quizEndpoint, quiz, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   /**
@@ -145,18 +155,21 @@ export class BackendService {
    * @returns Observable with the updated Quiz object
    */
   updateQuiz(id: string, quiz: {}): Observable<Quiz> {
-    return this.http.put<Quiz>(this.quizEndpoint + id, quiz);
+    return this.http.put<Quiz>(this.quizEndpoint + id, quiz, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   /**
    * Delete a quiz by id.
    *
-   * @param id of the quiz
-   * @param quiz to be deleted
+   * @param id of the quiz to be deleted
    * @returns Observable with the deleted Quiz object
    */
-  deleteQuiz(id: string, quiz: {}): Observable<Quiz> {
-    return this.http.delete<Quiz>(this.quizEndpoint + id, quiz);
+  deleteQuiz(id: string): Observable<Quiz> {
+    return this.http.delete<Quiz>(this.quizEndpoint + id, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   /* -------------------- Subject methods -------------------- */
