@@ -61,7 +61,7 @@ export class AdminHomeComponent implements OnInit {
   private deleteQuiz(clickedQuiz: Quiz): void {
     if (clickedQuiz._id !== undefined) {
       this.backendService
-        .deleteQuiz(clickedQuiz._id, clickedQuiz)
+        .deleteQuiz(clickedQuiz._id)
         .subscribe((deletedQuiz: Quiz) => {
           console.log('Done');
           console.log(deletedQuiz);
