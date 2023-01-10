@@ -112,7 +112,8 @@ export class BackendService {
    */
   addQuestion(question: {}): Observable<Question> {
     return this.http.post<Question>(this.questionEndpoint, question, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
     });
   }
 
@@ -148,7 +149,8 @@ export class BackendService {
    */
   addQuiz(quiz: {}): Observable<Quiz> {
     return this.http.post<Quiz>(this.quizEndpoint, quiz, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
     });
   }
 
@@ -161,7 +163,8 @@ export class BackendService {
    */
   updateQuiz(id: string, quiz: {}): Observable<Quiz> {
     return this.http.put<Quiz>(this.quizEndpoint + id, quiz, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
     });
   }
 
@@ -173,7 +176,8 @@ export class BackendService {
    */
   deleteQuiz(id: string): Observable<Quiz> {
     return this.http.delete<Quiz>(this.quizEndpoint + id, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
     });
   }
 
