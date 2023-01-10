@@ -21,7 +21,6 @@
     <p>Played: {{ quiz.played }}</p>
 
     <div *ngIf="isAdmin" class="button-group">
-      <!-- TODO send the quiz object as data to the edit component -->
       <button routerLink="/admin-quiz-edit" [queryParams]="{ id: quiz._id }">
         Edit
       </button>

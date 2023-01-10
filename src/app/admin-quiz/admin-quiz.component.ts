@@ -168,7 +168,6 @@ export class AdminQuizComponent implements OnInit {
    */
   protected onQuizCreate() {
     if (this.isEditMode) {
-      // TODO Possibly take another approach if "quiz" shouldn't be used. Validate the update to the user in "Edit", close the "new quiz" or something.
       this.updateQuiz();
     } else {
       this.addQuiz();
@@ -181,9 +180,8 @@ export class AdminQuizComponent implements OnInit {
   private updateQuiz() {
     this.backendService
       .updateQuiz(this.idOfQuizBeingEdited, this.createQuiz())
-      .subscribe((quiz: Quiz) => {
+      .subscribe(() => {
         this.quizSubmitted();
-        console.log(quiz);
       });
   }
 
@@ -191,8 +189,7 @@ export class AdminQuizComponent implements OnInit {
    * Adds the new quiz using the BackendService.
    */
   private addQuiz() {
-    this.backendService.addQuiz(this.createQuiz()).subscribe((quiz: Quiz) => {
-      console.log(quiz);
+    this.backendService.addQuiz(this.createQuiz()).subscribe(() => {
       this.quizSubmitted();
     });
   }
