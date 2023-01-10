@@ -59,7 +59,6 @@ export class AdminQuestionComponent implements OnInit {
     const newQuestion = this.createQuestion();
     this.backendService.addQuestion(newQuestion).subscribe({
       next: (data) => {
-        console.log(data);
         this.isSuccessful = true;
         this.isPostFailed = false;
         this.questionAdded.emit(data);

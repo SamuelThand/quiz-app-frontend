@@ -109,8 +109,6 @@ export class PlayQuizComponent implements OnInit {
   private toggleSelected(outerIndex: number, innerIndex: number): void {
     this.selectedOption[outerIndex].fill(false);
     this.selectedOption[outerIndex][innerIndex] = true;
-    console.log('Question number: ' + (outerIndex + 1));
-    console.log(this.selectedOption[outerIndex]);
   }
 
   /**
@@ -128,9 +126,7 @@ export class PlayQuizComponent implements OnInit {
     this.quiz.played = this.quiz.played ? this.quiz.played + 1 : 1;
     this.backendService
       .updateQuiz(this.quiz._id, this.quiz)
-      .subscribe((quiz: Quiz) => {
-        console.log(quiz);
-      });
+      .subscribe(() => {});
   }
 
   /**
