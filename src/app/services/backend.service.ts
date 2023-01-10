@@ -23,6 +23,9 @@ export class BackendService {
   private subjectEndpoint = this.#url + 'subjects/';
   private http: HttpClient;
 
+  // TODO: Make sure this boolean is used correctly
+  public isAdmin: boolean = false;
+
   constructor(http: HttpClient) {
     this.http = http;
   }
@@ -50,6 +53,17 @@ export class BackendService {
         withCredentials: true
       }
     );
+  }
+
+  /**
+   * Sign out from the Admin in object in the backend.
+   *
+   * @returns message from the backend
+   */
+  signOut(): Observable<any> {
+    return this.http.get(this.adminEndpoint + 'signout', {
+      withCredentials: true
+    });
   }
 
   /**
