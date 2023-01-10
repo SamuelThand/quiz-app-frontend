@@ -41,8 +41,8 @@ export class BackendService {
     return this.http.post<Admin>(
       this.adminEndpoint + 'signin',
       {
-        username,
-        password
+        username: username,
+        password: password
       },
       {
         headers: { 'Content-Type': 'application/json' }
