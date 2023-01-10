@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit {
   login() {
     const val = this.form;
 
+    // this.backendService.signIn('Admin1', 'Test123').subscribe((response) => {
+    //   console.log(response);
+    // });
+
     if (val.username && val.password) {
       this.backendService.signIn(val.username, val.password).subscribe({
         next: (data) => {
