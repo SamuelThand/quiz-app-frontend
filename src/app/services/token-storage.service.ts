@@ -9,19 +9,19 @@ const USER_KEY = 'auth-user';
 export class TokenStorageService {
   constructor() {}
 
-  getToken(): any {
-    return window.sessionStorage.getItem('token');
-  }
+  // getToken(): any {
+  //   return window.sessionStorage.getItem('token');
+  // }
 
-  signOut(): void {
-    window.sessionStorage.clear();
-  }
+  // signOut(): void {
+  //   window.sessionStorage.clear();
+  // }
 
-  saveToken(token: any) {
-    console.log(token);
-  }
+  // saveToken(token: any) {
+  //   console.log(token);
+  // }
 
-  saveAdmin(admin: Admin) {
-    console.log(admin);
-  }
+  // saveAdmin(admin: Admin) {
+  //   console.log(admin);
+  // }
 }

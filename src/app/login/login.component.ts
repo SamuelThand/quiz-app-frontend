@@ -35,33 +35,33 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-    }
+    // if (this.tokenStorage.getToken()) {
+    //   this.isLoggedIn = true;
+    // }
   }
 
   login() {
     const val = this.form;
 
-    // this.backendService.signIn('Admin1', 'Test123').subscribe((response) => {
-    //   console.log(response);
-    // });
+    this.backendService.signIn('Admin1', 'Test123').subscribe((response) => {
+      console.log(response);
+    });
 
-    if (val.username && val.password) {
-      this.backendService.signIn(val.username, val.password).subscribe({
-        next: (data) => {
-          this.tokenStorage.saveToken(data.accessToken);
-          this.tokenStorage.saveAdmin(data);
+    // if (val.username && val.password) {
+    //   this.backendService.signIn(val.username, val.password).subscribe({
+    //     next: (data) => {
+    //       this.tokenStorage.saveToken(data.accessToken);
+    //       this.tokenStorage.saveAdmin(data);
 
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
-          this.router.navigateByUrl('/admin-home');
-        },
-        error: (err) => {
-          console.log(err);
-          this.isLoginFailed = true;
-        }
-      });
-    }
+    //       this.isLoginFailed = false;
+    //       this.isLoggedIn = true;
+    //       this.router.navigateByUrl('/admin-home');
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //       this.isLoginFailed = true;
+    //     }
+    //   });
+    // }
   }
 }
