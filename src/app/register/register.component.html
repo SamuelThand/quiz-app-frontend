@@ -4,26 +4,71 @@
   <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="login-image" />
 
   <!-- TODO lägg till form logik med ngIf, submit osv. -->
-  <form>
+  <form
+    *ngIf="!isSuccessful"
+    name="form"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidate
+  >
     <div class="form-group">
       <label for="firstname">First name</label>
-      <input type="text" class="form-control" name="firstname" required />
-      <div class="required-alert" role="alert" hidden>
-        Firstname is required to register!
+      <input
+        [(ngModel)]="form.firstName"
+        type="text"
+        class="form-control"
+        name="firstname"
+        required
+        #firstname="ngModel"
+      />
+      <div
+        class="required-alert"
+        *ngIf="firstname.errors && f.submitted"
+        role="alert"
+      >
+        <div *ngIf="firstname.errors['required']">
+          Firstname is required to register!
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label for="lastname">Last name</label>
-      <input type="text" class="form-control" name="lastname" required />
-      <div class="required-alert" role="alert" hidden>
-        Firstname is required to register!
+      <input
+        type="text"
+        class="form-control"
+        name="lastname"
+        [(ngModel)]="form.lastName"
+        required
+        #lastname="ngModel"
+      />
+      <div
+        class="required-alert"
+        *ngIf="lastname.errors && f.submitted"
+        role="alert"
+      >
+        <div *ngIf="lastname.errors['required']">
+          Lastname is required to register!
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" required />
-      <div class="required-alert" role="alert" hidden>
-        Username is required to register!
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        [(ngModel)]="form.userName"
+        required
+        #username="ngModel"
+      />
+      <div
+        *ngIf="username.errors && f.submitted"
+        class="required-alert"
+        role="alert"
+      >
+        <div *ngIf="username.errors['required']">
+          Username is required to register!
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -32,12 +77,20 @@
         type="password"
         class="form-control"
         name="password"
+        [(ngModel)]="form.password"
         required
         minlength="6"
+        #password="ngModel"
       />
-      <div class="required-alert" role="alert" hidden>
-        <div>Password is required</div>
-        <div>Password must be at least 6 characters</div>
+      <div
+        class="required-alert"
+        *ngIf="password.errors && f.submitted"
+        role="alert"
+      >
+        <div *ngIf="password.errors['required']">Password is required</div>
+        <div *ngIf="password.errors['minlength']">
+          Password must be at least 6 characters
+        </div>
       </div>
       <div class="form-group">
         <label for="age">Age (Optional)</label>
@@ -46,7 +99,9 @@
           inputmode="numeric"
           class="form-control"
           name="age"
+          [(ngModel)]="form.age"
           maxlength="3"
+          #age="ngModel"
         />
       </div>
       <div class="form-group">
@@ -62,7 +117,9 @@
               type="radio"
               class="form-control"
               name="sex"
+              [(ngModel)]="form.sex"
               id="sex-female"
+              #sex="ngModel"
             />
           </div>
         </div>
@@ -71,10 +128,10 @@
         <button>Register</button>
       </div>
       <div class="form-group">
-        <div class="required-alert" role="alert" hidden>
+        <div *ngIf="isPostFailed" class="required-alert" role="alert">
           Login failed: errorMessage binding
         </div>
-        <div class="alert alert-success" hidden>
+        <div *ngIf="isSuccessful" class="success-alert">
           Logged in as INLOGGAD_ADMIN binding.
         </div>
       </div>
