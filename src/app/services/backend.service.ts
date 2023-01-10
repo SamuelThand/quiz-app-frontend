@@ -124,15 +124,14 @@ export class BackendService {
     return this.http.get<Quiz[]>(this.quizEndpoint);
   }
 
-  // TODO: Change this and backend to id (name is not unique, if kept, make name unique)
   /**
-   * Get a Quiz by name.
+   * Get a Quiz by id.
    *
-   * @param name name of the Quiz
+   * @param id id of the Quiz
    * @returns Observable with the Quiz object
    */
-  getQuiz(name: string): Observable<Quiz> {
-    return this.http.get<Quiz>(this.quizEndpoint + name);
+  getQuiz(id: string): Observable<Quiz> {
+    return this.http.get<Quiz>(this.quizEndpoint + id);
   }
 
   /**
