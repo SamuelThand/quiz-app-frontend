@@ -13,7 +13,8 @@ import { Subject } from '../models/subject.model';
 export class BackendService {
   // TODO: Replace localhost url with azure url
   #url: string =
-    'https://sath2102-project-backend-dt190g-ht22.azurewebsites.net/'; // URL to the backend
+    // 'https://sath2102-project-backend-dt190g-ht22.azurewebsites.net/'; // URL to the backend
+    'http://localhost:3000/'; // URL to the backend
 
   // Route endpoints
   private adminEndpoint = this.#url + 'admins/';
@@ -45,7 +46,8 @@ export class BackendService {
         password: password
       },
       {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
       }
     );
   }
@@ -122,7 +124,10 @@ export class BackendService {
    * @returns Observable with an array of all existing Quiz objects
    */
   getQuizzes(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(this.quizEndpoint);
+    return this.http.get<Quiz[]>(this.quizEndpoint, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+    });
   }
 
   /**
