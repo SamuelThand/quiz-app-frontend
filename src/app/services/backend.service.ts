@@ -12,8 +12,8 @@ import { Subject } from '../models/subject.model';
 })
 export class BackendService {
   // TODO: Replace localhost url with azure url
-  #url: string =
-    'https://sath2102-project-backend-dt190g-ht22.azurewebsites.net/'; // URL to the backend
+  #url: string = 'http://localhost:3000/';
+  // 'https://sath2102-project-backend-dt190g-ht22.azurewebsites.net/'; // URL to the backend
 
   // Route endpoints
   private adminEndpoint = this.#url + 'admins/';
@@ -37,12 +37,12 @@ export class BackendService {
    * @param password password of the Admin
    * @returns the Admin object
    */
-  signIn(username: string, password: string): Observable<Admin> {
+  signIn(username: string, password: string) {
     return this.http.post<Admin>(
       this.adminEndpoint + 'signin',
       {
-        username,
-        password
+        username: username,
+        password: password
       },
       {
         headers: { 'Content-Type': 'application/json' }
