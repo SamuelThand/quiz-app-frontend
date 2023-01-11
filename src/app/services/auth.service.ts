@@ -24,11 +24,4 @@ export class AuthService {
       error: () => errorCallback()
     });
   }
-
-  /**
-   * Redirect the user to the login page
-   */
-  forceRedirectToLogin() {
-    this.router.navigateByUrl('/');
-  }
 }

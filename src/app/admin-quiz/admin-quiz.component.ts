@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { BackendService } from '../services/backend.service';
 import { Question } from '../models/question.model';
 import { Quiz } from '../models/quiz.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-quiz',
@@ -13,6 +14,7 @@ import { Quiz } from '../models/quiz.model';
 export class AdminQuizComponent implements OnInit {
   private backendService: BackendService;
   private authService: AuthService;
+  private router: Router;
   protected availableQuestions: Question[] = [];
   protected quizQuestions: Question[] = [];
   protected quizName: string = '';
@@ -26,12 +28,20 @@ export class AdminQuizComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     backendService: BackendService,
-    authService: AuthService
+    authService: AuthService,
+    router: Router
   ) {
     this.backendService = backendService;
     this.activatedRoute = route;
     this.authService = authService;
-    this.authService.authCheck(() => {}, this.authService.forceRedirectToLogin);
+    this.router = router;
+
+    this.authService.authCheck(
+      () => {},
+      () => {
+        this.router.navigateByUrl('/');
+      }
+    );
   }
 
   ngOnInit(): void {

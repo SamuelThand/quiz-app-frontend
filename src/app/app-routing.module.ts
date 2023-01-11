@@ -14,13 +14,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'admin-home',
-    component: AdminHomeComponent,
-    data: { isAdmin: true }
+    component: AdminHomeComponent
   },
   {
     path: 'guest-home',
-    component: AdminHomeComponent,
-    data: { isAdmin: false }
+    component: AdminHomeComponent
   },
   {
     path: 'admin-quiz-create',

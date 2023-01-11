@@ -2,7 +2,7 @@
 
 <section class="list-container">
   <h2>Quizzes</h2>
-  <div *ngIf="isAdmin" class="create-buttons">
+  <div *ngIf="isLoggedIn" class="create-buttons">
     <button routerLink="/admin-quiz-create">Create new quiz</button>
     <button routerLink="/admin-question">Create new question</button>
   </div>
@@ -20,7 +20,7 @@
     <p>Cration date: {{ quiz.date | date : 'yyyy-MM-dd - hh:mm ' }}</p>
     <p>Played: {{ quiz.played }}</p>
 
-    <div *ngIf="isAdmin" class="button-group">
+    <div *ngIf="isLoggedIn" class="button-group">
       <button routerLink="/admin-quiz-edit" [queryParams]="{ id: quiz._id }">
         Edit
       </button>

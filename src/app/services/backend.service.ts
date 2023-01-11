@@ -1,6 +1,6 @@
 // Import angular modules
-import { Admin } from '../models/admin.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Admin } from '../models/admin.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Question } from '../models/question.model';

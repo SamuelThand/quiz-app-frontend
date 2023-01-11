@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { BackendService } from '../services/backend.service';
 import { Question } from '../models/question.model';
+import { Router } from '@angular/router';
 import { Subject } from '../models/subject.model';
 
 @Component({
@@ -12,6 +13,7 @@ import { Subject } from '../models/subject.model';
 export class AdminQuestionComponent implements OnInit {
   private backendService: BackendService;
   private authService: AuthService;
+  private router: Router;
   protected subjects: Subject[] = [];
   protected form: any = {
     name: null,
@@ -29,11 +31,21 @@ export class AdminQuestionComponent implements OnInit {
   private errorMessage = '';
   @Output() questionAdded = new EventEmitter<Question>();
 
-  constructor(backendService: BackendService, authService: AuthService) {
+  constructor(
+    backendService: BackendService,
+    authService: AuthService,
+    router: Router
+  ) {
     this.backendService = backendService;
     this.authService = authService;
+    this.router = router;
     this.questionAdded = new EventEmitter<Question>();
-    this.authService.authCheck(() => {}, this.authService.forceRedirectToLogin);
+    this.authService.authCheck(
+      () => {},
+      () => {
+        this.router.navigateByUrl('/');
+      }
+    );
   }
 
   ngOnInit(): void {
