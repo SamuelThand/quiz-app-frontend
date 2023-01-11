@@ -51,6 +51,12 @@ label {
   border-radius: 0.25rem;
 }
 
+#login-failed {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
 input:focus {
   outline: none;
 }
