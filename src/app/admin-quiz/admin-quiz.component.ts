@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { BackendService } from '../services/backend.service';
 import { Question } from '../models/question.model';
 import { Quiz } from '../models/quiz.model';
@@ -11,6 +12,7 @@ import { Quiz } from '../models/quiz.model';
 })
 export class AdminQuizComponent implements OnInit {
   private backendService: BackendService;
+  private authService: AuthService;
   protected availableQuestions: Question[] = [];
   protected quizQuestions: Question[] = [];
   protected quizName: string = '';
@@ -21,9 +23,15 @@ export class AdminQuizComponent implements OnInit {
   private idOfQuizBeingEdited: string = '';
   protected quizRecentlySubmitted: boolean = false;
 
-  constructor(private route: ActivatedRoute, backendService: BackendService) {
+  constructor(
+    private route: ActivatedRoute,
+    backendService: BackendService,
+    authService: AuthService
+  ) {
     this.backendService = backendService;
     this.activatedRoute = route;
+    this.authService = authService;
+    this.authService.authCheck();
   }
 
   ngOnInit(): void {
