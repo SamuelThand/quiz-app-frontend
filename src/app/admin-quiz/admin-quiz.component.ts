@@ -31,7 +31,7 @@ export class AdminQuizComponent implements OnInit {
     this.backendService = backendService;
     this.activatedRoute = route;
     this.authService = authService;
-    this.authService.authCheck();
+    this.authService.authCheck(() => {}, this.authService.forceRedirectToLogin);
   }
 
   ngOnInit(): void {

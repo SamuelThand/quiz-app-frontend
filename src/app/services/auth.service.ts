@@ -15,19 +15,20 @@ export class AuthService {
   }
 
   /**
-   * Check if there is an active logged in session.
+   * Check if there is an active logged in session. Executes a passed callback if response
+   * is successful, another if the response is an error.
    */
-  authCheck() {
+  authCheck(successCallback: Function, errorCallback: Function) {
     this.backendService.isLoggedin().subscribe({
-      next: () => {},
-      error: () => this.forceRedirectToLogin()
+      next: () => successCallback(),
+      error: () => errorCallback()
     });
   }
 
   /**
    * Redirect the user to the login page
    */
-  private forceRedirectToLogin() {
+  forceRedirectToLogin() {
     this.router.navigateByUrl('/');
   }
 }

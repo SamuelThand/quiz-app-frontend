@@ -1,3 +1,4 @@
+import { AuthService } from '../services/auth.service';
 import { BackendService } from '../services/backend.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,14 +11,26 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   private backendService: BackendService;
   private router: Router;
+  private authService: AuthService;
   protected form: any = {
     username: null,
     password: null
   };
 
-  constructor(backendService: BackendService, router: Router) {
+  constructor(
+    backendService: BackendService,
+    router: Router,
+    authService: AuthService
+  ) {
     this.backendService = backendService;
     this.router = router;
+    this.authService = authService;
+    authService.authCheck(
+      () => {
+        router.navigateByUrl('/admin-home');
+      },
+      () => {}
+    );
   }
 
   /**

@@ -33,7 +33,7 @@ export class AdminQuestionComponent implements OnInit {
     this.backendService = backendService;
     this.authService = authService;
     this.questionAdded = new EventEmitter<Question>();
-    this.authService.authCheck();
+    this.authService.authCheck(() => {}, this.authService.forceRedirectToLogin);
   }
 
   ngOnInit(): void {

@@ -32,7 +32,7 @@ export class RegisterComponent {
 
   // TODO: Add errorMessage, isSuccessful, isPostFailed and admin username to message if successful
   private submit() {
-    this.backendService.signUp(this.form).subscribe((response) => {
+    this.backendService.signUp(this.form).subscribe(() => {
       this.isSuccessful = true;
     });
   }

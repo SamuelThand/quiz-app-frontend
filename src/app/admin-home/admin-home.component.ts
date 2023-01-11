@@ -27,7 +27,7 @@ export class AdminHomeComponent implements OnInit {
     this.backendService = backendService;
     this.router = router;
     this.authService = authService;
-    this.authService.authCheck();
+    this.authService.authCheck(() => {}, this.authService.forceRedirectToLogin);
   }
 
   ngOnInit(): void {

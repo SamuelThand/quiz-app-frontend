@@ -1,26 +1,50 @@
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 import { BackendService } from './services/backend.service';
-import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'sath2102_project_frontend_dt190g';
   private backendService: BackendService;
+  private authService: AuthService;
+  private router: Router;
+  protected displayLogoutButton: Boolean = false;
 
-  constructor(backendService: BackendService) {
+  constructor(
+    backendService: BackendService,
+    authService: AuthService,
+    router: Router
+  ) {
     this.backendService = backendService;
+    this.authService = authService;
+    this.router = router;
+  }
+
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isLoggedIn();
+      }
+    });
   }
 
   /**
-   * Get the current admin status.
-   *
-   * @returns true if the user is logged in as admin, false otherwise
+   * Checks if a user is logged in.
    */
-  protected isAdmin(): boolean {
-    return this.backendService.isAdmin;
+  protected isLoggedIn(): void {
+    this.authService.authCheck(
+      () => {
+        this.displayLogoutButton = true;
+      },
+      () => {
+        this.displayLogoutButton = false;
+      }
+    );
   }
 
   /**
@@ -30,5 +54,19 @@ export class AppComponent {
     this.backendService.signOut().subscribe(() => {
       this.backendService.isAdmin = false;
     });
+  }
+
+  /**
+   * Determines the destination of the home button.
+   */
+  protected onHomeButton(): void {
+    this.authService.authCheck(
+      () => {
+        this.router.navigateByUrl('/admin-home');
+      },
+      () => {
+        this.router.navigateByUrl('/');
+      }
+    );
   }
 }
