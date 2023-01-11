@@ -112,13 +112,14 @@
         <div class="sex-group">
           <div class="radio-pair">
             <label for="sex-male">Man</label>
-            <input type="radio" class="form-control" name="sex" id="sex-male" />
+            <input type="radio" class="form-control" value="Male" name="sex" [(ngModel)]="form.sex" id="sex-male" #sex="ngModel" />
           </div>
           <div class="radio-pair">
             <label for="sex-female">Woman</label>
             <input
               type="radio"
               class="form-control"
+              value="Woman"
               name="sex"
               [(ngModel)]="form.sex"
               id="sex-female"
