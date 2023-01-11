@@ -41,6 +41,16 @@ label {
   border-radius: 0.1rem;
 }
 
+.required-alert {
+  color: #721c24;
+  background-color: #fd9ca488;
+  border-color: #721c24;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 0.1rem solid;
+  border-radius: 0.25rem;
+}
+
 input:focus {
   outline: none;
 }
