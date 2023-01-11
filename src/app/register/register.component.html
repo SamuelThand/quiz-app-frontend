@@ -59,6 +59,7 @@
         name="username"
         [(ngModel)]="form.userName"
         required
+        minlength="3"
         #username="ngModel"
       />
       <div
@@ -68,6 +69,9 @@
       >
         <div *ngIf="username.errors['required']">
           Username is required to register!
+        </div>
+        <div *ngIf="username.errors['minlength']">
+          Username must be at least 6 characters!
         </div>
       </div>
     </div>
