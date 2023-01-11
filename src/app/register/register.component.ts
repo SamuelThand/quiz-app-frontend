@@ -13,7 +13,6 @@ export class RegisterComponent {
   private router: Router;
   protected isSuccessful = false;
   protected isPostFailed = false;
-  protected errorMessage = '';
   protected form: Admin = {
     firstName: '',
     lastName: '',
@@ -30,10 +29,15 @@ export class RegisterComponent {
     this.submit();
   }
 
-  // TODO: Add errorMessage, isSuccessful, isPostFailed and admin username to message if successful
   private submit() {
-    this.backendService.signUp(this.form).subscribe(() => {
-      this.isSuccessful = true;
-    });
+    this.backendService.signUp(this.form).subscribe(
+      () => {
+        this.isSuccessful = true;
+        this.router.navigateByUrl('/');
+      },
+      () => {
+        this.isPostFailed = true;
+      }
+    );
   }
 }
