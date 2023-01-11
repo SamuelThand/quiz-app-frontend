@@ -6,9 +6,28 @@
   <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
     <div class="form-group">
       <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"/>
-      <div class="required-alert" role="alert" hidden>
-        Username is required to login!
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        required
+        minlength="3"
+        [(ngModel)]="form.username"
+        #username="ngModel"
+      />
+      <div *ngIf="username.errors && f.submitted" class="required-alert">
+        <div
+          *ngIf="username.errors['required']"
+          role="alert"
+        >
+          Username is required to login!
+        </div>
+        <div
+          *ngIf="username.errors['minlength']"
+          role="alert"
+        >
+          Username must be at least 3 characters
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -22,9 +41,16 @@
         minlength="6"
         #password="ngModel"
       />
-      <div class="required-alert" role="alert" hidden>
-        <div>Password is required to login!</div>
-        <div>Password must be at least 6 characters</div>
+      <div
+        *ngIf="password.errors && f.submitted"
+        class="required-alert"
+        role="alert">
+        <div *ngIf="password.errors['required']">
+          Password is required to login!
+        </div>
+        <div *ngIf="password.errors['minlength']">
+          Password must be at least 6 characters
+        </div>
       </div>
       <div class="form-group">
         <button (click)="login()">Login</button>
@@ -38,11 +64,8 @@
         >
       </div>
       <div class="form-group">
-        <div class="required-alert" role="alert" hidden>
-          Login failed: errorMessage binding
-        </div>
-        <div class="alert alert-success" hidden>
-          Logged in as INLOGGAD_ADMIN binding.
+        <div *ngIf="isPostFailed" class="required-alert" role="alert">
+          Login failed
         </div>
       </div>
     </div>

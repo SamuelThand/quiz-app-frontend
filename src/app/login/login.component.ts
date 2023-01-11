@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   private backendService: BackendService;
   private router: Router;
+  protected isPostFailed = false;
   private authService: AuthService;
   protected form: any = {
     username: null,
@@ -40,10 +41,12 @@ export class LoginComponent {
     const username = this.form.username;
     const password = this.form.password;
 
-    //  TODO felmeddelande vid inloggningsförsök med felaktiga uppgifter
     if (username && password) {
-      this.backendService.signIn(username, password).subscribe(() => {
-        this.router.navigateByUrl('/admin-home');
+      this.backendService.signIn(username, password).subscribe({
+        next: () => this.router.navigateByUrl('/admin-home'),
+        error: () => {
+          this.isPostFailed = true;
+        }
       });
     }
   }
