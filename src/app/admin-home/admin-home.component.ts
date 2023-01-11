@@ -29,33 +29,11 @@ export class AdminHomeComponent implements OnInit {
     this.router = router;
     this.authService = authService;
 
-    // backendService.isLoggedin().subscribe((response) => dosomething(response));
+    this.authService.authCheck();
   }
 
-  // dosomething(response: HttpResponse<Object>) {
-  //   console.log(response.status);
-  // }
-
   ngOnInit(): void {
-    // this.backendService
-    //   .isLoggedin()
-    //   .subscribe((response: HttpResponse<Object>) =>
-    //     this.authService.dosomething(response)
-    //   );
-
-    this.backendService
-      .isLoggedin()
-      .subscribe((response: HttpResponse<Object>) => {
-        if (response.status === 200) {
-          // router.navigateByUrl(route);
-        } else {
-          this.router.navigateByUrl('/');
-          console.log('kuk');
-        }
-      });
-
     this.determineEditMode();
-
     this.initQuizzes();
   }
 

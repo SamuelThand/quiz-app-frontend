@@ -1,25 +1,33 @@
-import { HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { BackendService } from './backend.service';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private router: Router;
+  private backendService: BackendService;
 
-  constructor(router: Router) {
+  constructor(router: Router, backendService: BackendService) {
     this.router = router;
+    this.backendService = backendService;
   }
 
-  dosomething(response: HttpResponse<Object>) {
-    console.log(response.status);
+  /**
+   * Check if there is an active logged in session.
+   */
+  authCheck() {
+    this.backendService.isLoggedin().subscribe({
+      next: () => {},
+      error: () => this.forceRedirectToLogin()
+    });
+  }
 
-    if (response.status === 200) {
-      // router.navigateByUrl(route);
-    } else {
-      this.router.navigateByUrl('/');
-      console.log('kuk')
-    }
+  /**
+   * Redirect the user to the login page
+   */
+  private forceRedirectToLogin() {
+    this.router.navigateByUrl('/');
   }
 }
