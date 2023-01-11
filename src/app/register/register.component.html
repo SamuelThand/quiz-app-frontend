@@ -3,7 +3,6 @@
 <div class="card">
   <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="login-image" />
 
-  <!-- TODO lägg till form logik med ngIf, submit osv. -->
   <form
     *ngIf="!isSuccessful"
     name="form"
@@ -133,10 +132,7 @@
       </div>
       <div class="form-group">
         <div *ngIf="isPostFailed" class="required-alert" role="alert">
-          Login failed: errorMessage binding
-        </div>
-        <div *ngIf="isSuccessful" class="success-alert">
-          Logged in as INLOGGAD_ADMIN binding.
+          Registration failed
         </div>
       </div>
     </div>

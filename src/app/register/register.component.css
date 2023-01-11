@@ -69,3 +69,14 @@ button:hover {
   cursor: pointer;
   opacity: 0.5;
 }
+
+.required-alert {
+  color: #721c24;
+  background-color: #fd9ca488;
+  border-color: #721c24;
+  padding: 0.5rem 1.25rem;
+  margin-top: 1rem;
+  border: 0.1rem solid;
+  border-radius: 0.25rem;
+  align-self: center;
+}
