@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 import { BackendService } from '../services/backend.service';
 import { Question } from '../models/question.model';
 import { Subject } from '../models/subject.model';
@@ -10,6 +11,7 @@ import { Subject } from '../models/subject.model';
 })
 export class AdminQuestionComponent implements OnInit {
   private backendService: BackendService;
+  private authService: AuthService;
   protected subjects: Subject[] = [];
   protected form: any = {
     name: null,
@@ -27,9 +29,11 @@ export class AdminQuestionComponent implements OnInit {
   private errorMessage = '';
   @Output() questionAdded = new EventEmitter<Question>();
 
-  constructor(backendService: BackendService) {
+  constructor(backendService: BackendService, authService: AuthService) {
     this.backendService = backendService;
+    this.authService = authService;
     this.questionAdded = new EventEmitter<Question>();
+    this.authService.authCheck();
   }
 
   ngOnInit(): void {

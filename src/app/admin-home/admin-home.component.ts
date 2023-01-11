@@ -1,9 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { BackendService } from '../services/backend.service';
-import { Quiz } from '../models/quiz.model';
 import { AuthService } from '../services/auth.service';
+import { BackendService } from '../services/backend.service';
 import { HttpResponse } from '@angular/common/http';
+import { Quiz } from '../models/quiz.model';
 
 @Component({
   selector: 'app-admin-home',
@@ -28,7 +28,6 @@ export class AdminHomeComponent implements OnInit {
     this.backendService = backendService;
     this.router = router;
     this.authService = authService;
-
     this.authService.authCheck();
   }
 
