@@ -2,6 +2,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { Quiz } from '../models/quiz.model';
+import { AuthService } from '../services/auth.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-home',
@@ -13,19 +15,45 @@ export class AdminHomeComponent implements OnInit {
   private activatedRoute: ActivatedRoute;
   private backendService: BackendService;
   private router: Router;
+  private authService: AuthService;
   protected isAdmin: boolean = false;
 
   constructor(
     activatedRoute: ActivatedRoute,
     backendService: BackendService,
-    router: Router
+    router: Router,
+    authService: AuthService
   ) {
     this.activatedRoute = activatedRoute;
     this.backendService = backendService;
     this.router = router;
+    this.authService = authService;
+
+    // backendService.isLoggedin().subscribe((response) => dosomething(response));
   }
 
+  // dosomething(response: HttpResponse<Object>) {
+  //   console.log(response.status);
+  // }
+
   ngOnInit(): void {
+    // this.backendService
+    //   .isLoggedin()
+    //   .subscribe((response: HttpResponse<Object>) =>
+    //     this.authService.dosomething(response)
+    //   );
+
+    this.backendService
+      .isLoggedin()
+      .subscribe((response: HttpResponse<Object>) => {
+        if (response.status === 200) {
+          // router.navigateByUrl(route);
+        } else {
+          this.router.navigateByUrl('/');
+          console.log('kuk');
+        }
+      });
+
     this.determineEditMode();
 
     this.initQuizzes();

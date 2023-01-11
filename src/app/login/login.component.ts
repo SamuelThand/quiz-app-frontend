@@ -27,9 +27,9 @@ export class LoginComponent {
     const username = this.form.username;
     const password = this.form.password;
 
+    //  TODO felmeddelande vid inloggningsförsök med felaktiga uppgifter
     if (username && password) {
       this.backendService.signIn(username, password).subscribe(() => {
-        this.backendService.isAdmin = true;
         this.router.navigateByUrl('/admin-home');
       });
     }
