@@ -12,8 +12,8 @@ import { Subject } from '../models/subject.model';
 })
 export class BackendService {
   #url: string =
-    // 'https://sath2102-project-backend-dt190g-ht22.azurewebsites.net/'; // URL to the backend
-    'http://localhost:3000/'; // URL to the backend
+    'https://sath2102-project-backend-dt190g-ht22.azurewebsites.net/'; // URL to the backend
+  // 'http://localhost:3000/'; // URL to the backend
 
   // Route endpoints
   private adminEndpoint = this.#url + 'admins/';
