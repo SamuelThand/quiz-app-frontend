@@ -1,6 +1,6 @@
 // Import angular modules
 import { Admin } from '../models/admin.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Question } from '../models/question.model';
@@ -28,6 +28,19 @@ export class BackendService {
 
   constructor(http: HttpClient) {
     this.http = http;
+  }
+
+  /**
+   * Test if an admin is currently logged into a session
+   *
+   * @returns Observable containing a HttpResponse
+   */
+  isLoggedin(): Observable<HttpResponse<Object>> {
+    return this.http.get(this.adminEndpoint + 'isloggedin', {
+      observe: 'response',
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+    });
   }
 
   /* -------------------- Admin methods -------------------- */
