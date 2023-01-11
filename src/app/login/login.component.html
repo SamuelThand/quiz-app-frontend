@@ -3,7 +3,6 @@
 <div class="card">
   <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="login-image" />
 
-  <!-- TODO lägg till form logik med ngIf, submit osv. -->
   <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
     <div class="form-group">
       <label for="username">Username</label>
@@ -28,9 +27,6 @@
         <div>Password must be at least 6 characters</div>
       </div>
       <div class="form-group">
-        <!-- TODO Ingen routerlink, authentication.
-           låt form validation bestämma om den ska gå vidare eller inte.-->
-        <!-- <button routerLink="/admin-home">Login</button> -->
         <button (click)="login()">Login</button>
       </div>
       <div class="form-group">

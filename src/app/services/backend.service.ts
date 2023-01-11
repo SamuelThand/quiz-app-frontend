@@ -11,7 +11,6 @@ import { Subject } from '../models/subject.model';
   providedIn: 'root'
 })
 export class BackendService {
-  // TODO: Replace localhost url with azure url
   #url: string =
     // 'https://sath2102-project-backend-dt190g-ht22.azurewebsites.net/'; // URL to the backend
     'http://localhost:3000/'; // URL to the backend
@@ -22,9 +21,6 @@ export class BackendService {
   private quizEndpoint = this.#url + 'quizzes/';
   private subjectEndpoint = this.#url + 'subjects/';
   private http: HttpClient;
-
-  // TODO: Make sure this boolean is used correctly
-  public isAdmin: boolean = false;
 
   constructor(http: HttpClient) {
     this.http = http;
@@ -44,8 +40,6 @@ export class BackendService {
   }
 
   /* -------------------- Admin methods -------------------- */
-
-  // TODO: Add backend functionality for sign in and sign up (possibly new endpoint and service "auth")
 
   /**
    * Sign in an Admin object in the backend.

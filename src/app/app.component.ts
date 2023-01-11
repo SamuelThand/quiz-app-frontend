@@ -51,9 +51,7 @@ export class AppComponent implements OnInit {
    * Logs out the user.
    */
   protected onLogout(): void {
-    this.backendService.signOut().subscribe(() => {
-      this.backendService.isAdmin = false;
-    });
+    this.backendService.signOut().subscribe(() => {});
   }
 
   /**
